@@ -1,0 +1,59 @@
+﻿@using AutoCow.Models
+@{
+    ViewData["title"] = "Cow | Handle";
+}
+
+<button id="convertButton" class="btn btn-primary mb-3 align-content-end">Convert to Table</button>
+<button id="convertToCards" class="btn btn-primary mb-3 align-content-end">Convert to Cards</button>
+
+
+<div class="row" id="cardContainer">
+    @foreach (Cow_profile item in ViewBag.Cows)
+    {
+        <div class="col-md-4">
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Cow:  @item.id</h5>
+                <p class="card-text">Type:  @item.type</p>
+                <p class="card-text">Price: @item.price</p>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-primary">Medical</button>
+                    <button class="btn btn-secondary">Full Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#convertButton").click(function () {
+            var tableHtml = "<table class='table'><thead><tr><th>ID</th><th>Type</th><th>Price</th></tr></thead><tbody>";
+
+            $("#cardContainer .card").each(function () {
+                var id = $(this).find(".card-title:eq(0)").text().replace("ID: ", "");
+                var type = $(this).find(".card-text:eq(0)").text().replace("Type: ", "");
+                var price = $(this).find(".card-text:eq(1)").text().replace("Price: $", "");
+
+                tableHtml += "<tr><td>" + id + "</td><td>" + type + "</td><td>" + price + "</td></tr>";
+            });
+
+            tableHtml += "</tbody></table>";
+
+            $("#cardContainer").html(tableHtml);
+        });
+
+        var originalHtml = $("#cardContainer").html(); // Store the original card layout
+
+        $("#convertToCards").click(function () {
+            var isTable = $("#cardContainer table").length > 0;
+
+            if (isTable) {
+                $("#cardContainer").html(originalHtml); // Restore the original card layout
+            }
+        });
+    });
+    </script>
