@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>4e19377c-e703-42bf-ae07-8f28ce7ce507</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Models\MLModel.consumption.cs" />
+    <Compile Remove="Models\MLModel.training.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\js\core\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\js\core\bootstrap.min.js" />
+    <None Include="wwwroot\js\core\popper.min.js" />
+    <None Include="wwwroot\js\jquery-easing\jquery.easing.compatibility.js" />
+    <None Include="wwwroot\js\jquery-easing\jquery.easing.js" />
+    <None Include="wwwroot\js\jquery-easing\jquery.easing.min.js" />
+    <None Include="wwwroot\js\plugins\bootstrap-notify.js" />
+    <None Include="wwwroot\js\plugins\Chart.extension.js" />
+    <None Include="wwwroot\js\plugins\chartjs.min.js" />
+    <None Include="wwwroot\js\plugins\countup.min.js" />
+    <None Include="wwwroot\js\plugins\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\js\plugins\smooth-scrollbar.min.js" />
+    <None Include="wwwroot\js\plugins\world.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.ML" Version="2.0.1" />
+    <PackageReference Include="Microsoft.ML.TimeSeries" Version="1.7.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+</Project>
