@@ -1,0 +1,76 @@
+﻿using AutoCow.Models;
+using AutoCow.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using System.Diagnostics;
+using Newtonsoft.Json;
+using Microsoft.ML;
+namespace AutoCow.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly ProductionRepository _productionRepository;
+        private readonly Daily_planRepository _daily_planRepository;
+        private readonly MachineLearning _machineLearningRepository;
+
+        public HomeController()
+        {
+            string connectionString = "Data Source=localhost;Initial Catalog=milk;Integrated Security=True;";
+            _productionRepository = new ProductionRepository(connectionString);
+            _daily_planRepository = new Daily_planRepository(connectionString);
+            _machineLearningRepository = new MachineLearning(connectionString);
+        }
+
+        [Route("")]
+        public ActionResult Index()
+        {
+
+            
+            List<ProductionData> productionDataList = _productionRepository.GetProductionData();
+
+            // Convert the dataset to arrays for use in the view //
+            var dates = productionDataList.Select(d => d.Date.ToShortDateString()).ToArray();
+            var milkProductions = productionDataList.Select(d => d.MilkProduction).ToArray();
+
+            //Setting the arrays in view Bag //
+            ViewBag.Dates = JsonConvert.SerializeObject(dates);
+            ViewBag.MilkProductions = JsonConvert.SerializeObject(milkProductions);
+
+
+
+            List<Daily_plan> daily_planList = _daily_planRepository.GetDailyData();
+
+            var bar_dates = daily_planList.Select(d => d.date.ToShortDateString()).ToArray();
+            var bar_milk = daily_planList.Select(d => d.total).ToArray();
+            var bar_types = daily_planList.Select(d => d.type).ToArray();
+
+            ViewBag.bar_dates = JsonConvert.SerializeObject(bar_dates);
+            ViewBag.bar_milk = JsonConvert.SerializeObject(bar_milk);
+            ViewBag.bar_types = JsonConvert.SerializeObject(bar_types);
+
+            List<Daily_plan> condition_countList = _daily_planRepository.GetConditionCount();
+
+            var alert_conditions = condition_countList.Select(d => d.condition).ToArray();
+            var alert_counts = condition_countList.Select(d => d.count_condition).ToArray();
+
+            ViewBag.alert_conditions = JsonConvert.SerializeObject(alert_conditions);
+            ViewBag.alert_counts = JsonConvert.SerializeObject(alert_counts);
+
+            return View();
+        }
+
+        [Route("privacy")]
+        public ActionResult Privacy() { return View(); }
+
+
+        [Route("dashboard")]
+        public ActionResult Dashboard() { return View(); }
+
+        [Route("d")]
+        public ActionResult Index1() { return View(); }
+    }
+
+
+
+
+}
