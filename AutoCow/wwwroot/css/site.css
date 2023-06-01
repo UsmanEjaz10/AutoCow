@@ -1,0 +1,70 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: antiquewhite;
+}
+
+#productionChart{
+    width: 300px;
+    height:250px;
+}
+
+#WeeklyMilk {
+    padding: 10px;
+    background-color: yellowgreen;
+    margin: 10px;
+    height: 150px;
+    width: 300px;
+    margin-bottom: 5px;
+}
+
+.table-container {
+    padding: 20px;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table-container table thead {
+        background-color: #f8f9fa;
+    }
+
+    .table-container table th,
+    .table-container table td {
+        padding: 12px;
+        border: 1px solid #dee2e6;
+    }
+
+    .table-container table th {
+        font-weight: bold;
+    }
+
+    .table-container table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table-container table tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    .table-container table tbody tr:hover {
+        background-color: #e9ecef;
+    }
+
