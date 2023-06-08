@@ -1,7 +1,9 @@
 ﻿using AutoCow.Models;
 using Microsoft.Data.SqlClient;
+using System.Numerics;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Security.Cryptography.X509Certificates;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace AutoCow.Repositories
@@ -81,7 +83,7 @@ namespace AutoCow.Repositories
         }
 
 
-        public void Add(Daily_plan dailyPlan)
+        public Boolean Add(Daily_plan dailyPlan)
         {
             Console.WriteLine("Info recieved at repository");
 
@@ -103,7 +105,7 @@ namespace AutoCow.Repositories
                         {
                             Console.WriteLine("Date = " + reader["date"].ToString() + " -----------" + DateTime.Now);
                             Console.WriteLine("Same primary key entered");
-                            return;
+                            return false;
                         }
                     }
 
@@ -133,14 +135,14 @@ namespace AutoCow.Repositories
                     Console.WriteLine("Executed....");
                 }
 
-
+                return true;
 
 
             }
         }
 
 
-        public void AddProduction(Daily_plan dailyPlan)
+        public Boolean AddProduction(Daily_plan dailyPlan)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -169,7 +171,7 @@ namespace AutoCow.Repositories
                                 {
                                     Console.WriteLine("Updation successful");
 
-                                    return;
+                                    return true;
                                 }
                             }
                         }
@@ -185,7 +187,7 @@ namespace AutoCow.Repositories
 
                             insert.ExecuteNonQuery();
                             Console.WriteLine("Insertion Executed....");
-                            return;
+                            return true;
                         }
                     
 
@@ -220,6 +222,68 @@ namespace AutoCow.Repositories
             }
 
             return type;
+        }
+
+        public Cow_profile UpdateCow_ProfileData(Daily_plan profile)
+        {
+            Cow_profile cow_Profile = new Cow_profile();
+            cow_Profile.id = profile.id;
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT AVG(milk) AS average_milk, AVG(temperature) AS average_temp FROM daily_plan WHERE id = @id AND date >= DATEADD(DAY, -3, GETDATE())";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", profile.id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if(reader.Read())
+                        {
+                            cow_Profile.avg_milk = (int)reader["average_milk"];
+                            cow_Profile.avg_temperature =(int)reader["average_temp"];
+
+                            reader.Close();
+                            string insertQuery = "Update cow_profile set avg_milk = @avg_milk, avg_temp = @avg_temp where id = @cow_id";
+                            using (SqlCommand insert = new SqlCommand(insertQuery, connection))
+                            {
+
+                                insert.Parameters.AddWithValue("@cow_id", cow_Profile.id);
+                                insert.Parameters.AddWithValue("@avg_milk", cow_Profile.avg_milk);
+                                insert.Parameters.AddWithValue("@avg_temp", cow_Profile.avg_temperature);
+
+                                insert.ExecuteNonQuery();
+                                Console.WriteLine("Insertion Executed...Avg.");
+                                
+                            }
+
+                        }
+
+                        reader.Close();
+                    }
+                }
+
+                return cow_Profile;
+            }
+
+        }
+
+        public void deleteCowDailyData(Cow_profile cow_profile)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                String delete_query = "delete from daily_data where id = @id";
+
+                using (SqlCommand command = new SqlCommand(delete_query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", cow_profile.id);
+
+                    command.ExecuteNonQuery();
+                    Console.WriteLine("Cow with id " + cow_profile.id + " has been deleted... from daily data");
+                }
+            }
         }
     }
     

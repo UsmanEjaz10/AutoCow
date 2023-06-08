@@ -49,13 +49,17 @@ namespace AutoCow.Controllers
 
             model.condition = result.PredictedLabel;
             model.type = type;
-
+            Cow_profile cow_Profile;
 
             Console.WriteLine("Info recieved at controller now sending it to Repository");
 
-            _daily_planRepository.Add(model);
+            if(_daily_planRepository.Add(model) && _daily_planRepository.AddProduction(model))
+            {
+              cow_Profile =   _daily_planRepository.UpdateCow_ProfileData(model);
+            }
 
-            _daily_planRepository.AddProduction(model);
+            
+            
 
             // Perform further processing or store the data in the database
 

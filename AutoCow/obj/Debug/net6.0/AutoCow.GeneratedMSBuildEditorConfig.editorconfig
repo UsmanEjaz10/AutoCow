@@ -20,8 +20,16 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxlcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Lenovo/source/repos/AutoCow/AutoCow/Views/Cow_Profile/AddCow.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ293X1Byb2ZpbGVcQWRkQ293LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Lenovo/source/repos/AutoCow/AutoCow/Views/Cow_Profile/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ293X1Byb2ZpbGVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Lenovo/source/repos/AutoCow/AutoCow/Views/Cow_Profile/UpdateCow.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ293X1Byb2ZpbGVcVXBkYXRlQ293LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Lenovo/source/repos/AutoCow/AutoCow/Views/Daily/Index.cshtml]

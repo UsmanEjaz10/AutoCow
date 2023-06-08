@@ -1,10 +1,14 @@
 ﻿@using AutoCow.Models
+@model Cow_profile
 @{
     ViewData["title"] = "Cow | Handle";
+    
 }
 
 <button id="convertButton" class="btn btn-primary mb-3 align-content-end">Convert to Table</button>
 <button id="convertToCards" class="btn btn-primary mb-3 align-content-end">Convert to Cards</button>
+<button id="AddCow" class="btn btn-primary mb-3 align-content-end"><a href="Add">Add</a>
+</button>
 
 
 <div class="row" id="cardContainer">
@@ -16,9 +20,28 @@
                 <h5 class="card-title">Cow:  @item.id</h5>
                 <p class="card-text">Type:  @item.type</p>
                 <p class="card-text">Price: @item.price</p>
+                <p class="card-text">Avg-Milk: @item.avg_milk</p>
+                <p class="card-text">Avg-Temperature: @item.avg_temperature</p>
+                <p class="card-text">Category: @item.category</p>
+
                 <div class="d-flex justify-content-between">
-                    <button class="btn btn-primary">Medical</button>
-                    <button class="btn btn-secondary">Full Profile</button>
+                        @using (Html.BeginForm(FormMethod.Post))
+                        {
+                            @Html.Hidden("action" , "update")
+                            <input type="submit" value="Update" class="btn btn-primary">
+                        }
+                        @using (Html.BeginForm(FormMethod.Post))
+                        {
+                            <input type="hidden" name="id" value="@item.id">
+                            <input type="hidden" name="type" value="@item.type">
+                            <input type="hidden" name="price" value="@item.price">
+                            <input type="hidden" name="color" value="@item.color">
+                            <input type="hidden" name="milk" value="@item.avg_milk">
+                            <input type="hidden" name="temp" value="@item.avg_temperature">
+                            <input type="hidden" name="category" value="@item.category">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="submit" value="Delete" class="btn btn-primary">
+                        }
                     </div>
                 </div>
             </div>

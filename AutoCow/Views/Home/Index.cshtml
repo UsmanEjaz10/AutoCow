@@ -231,7 +231,7 @@
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Emergency Cases</p>
-                                <h4 class="mb-0" id="TotalAlerts">3,462</h4>
+                                <h4 class="mb-0" id="TotalAlerts"></h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
@@ -621,21 +621,7 @@
 
     //---------------------------------------------------------------//
 
-    var alert_conditions = @Html.Raw(ViewBag.alert_conditions);
-    var alert_counts = @Html.Raw(ViewBag.alert_counts);
-    var total = 0;
-    for (var j = 0; j < alert_counts.length; j++) {
-        if (alert_conditions[j] == "Critical") {
-            document.getElementById("critical").innerHTML = "Critical = " + alert_counts[j];
-            total++;
-        }
-        else if (alert_conditions[j] == "Serious") {
-            document.getElementById("serious").innerHTML = "Serious = " + alert_counts[j];
-            total++;
-        }
-    }
-    document.getElementById("TotalAlerts").innerHTML = total;
-
+    
     //-------------------------------------------------------------------------------//
 
 
@@ -660,11 +646,26 @@
     var milk_cost = (cost * total_milk)/1000;
     document.getElementById("milk_cost").innerHTML = "Rs " + milk_cost + "k";
 
-
     document.getElementById("TotalMilk").innerHTML = total_milk + "L";
     document.getElementById("Sahiwal").innerHTML = "Sahiwal Cattle: " + Sahiwal_count + "L <br>";
     document.getElementById("Brahman").innerHTML = "Brahman: " + Brahman_count + "L <br>";
     document.getElementById("Red").innerHTML = "Red Sindhi: " + Sindhi_count + "L <br>";
+
+    //-------------------------------------------------------------------------------------------//
+
+    var alert_conditions = @Html.Raw(ViewBag.alert_conditions);
+    var alert_counts = @Html.Raw(ViewBag.alert_counts);
+   
+    var total = 0;
+    for (var j = 0; j < alert_counts.length; j++) {
+        if (alert_conditions[j] == "Critical") {
+            total += alert_counts[j]; 
+        }
+        else if (alert_conditions[j] == "Serious") {
+                total += alert_counts[j];     
+        }
+    }
+    document.getElementById("TotalAlerts").innerHTML = alert_counts[0];
 
     
 </script>

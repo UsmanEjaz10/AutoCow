@@ -47,5 +47,61 @@ namespace AutoCow.Repositories
 
             return cow_profileList;
         }
+
+        public void AddCow(Cow_profile cow_profile)
+        {
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                String checkquery = "Select  * from cow_profile where id = @id";
+                using (SqlCommand command = new SqlCommand(checkquery, connection))
+                {
+                    command.Parameters.AddWithValue("@id", cow_profile.id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine("Date = " + reader["id"].ToString() + " -----------");
+                            Console.WriteLine("Same primary key entered");
+                            return;
+                        }
+                    }
+                }
+
+                string query = "Insert into cow_profile (id, color, type, price) values(@id, @color, @type, @price)";
+                using (SqlCommand add = new SqlCommand(query, connection))
+                {
+                    add.Parameters.AddWithValue("@id", cow_profile.id);
+                    add.Parameters.AddWithValue("@color", cow_profile.color);
+                    add.Parameters.AddWithValue("@type", cow_profile.type);
+                    add.Parameters.AddWithValue("@price", cow_profile.price);
+
+                    add.ExecuteNonQuery();
+                    Console.WriteLine("New Cow Added...");
+
+                }
+            }
+            
+        }
+
+
+        public void deleteCow(Cow_profile cow_profile) {
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                String delete_query = "delete from cow_profile where id = @id";
+
+                using (SqlCommand command = new SqlCommand(delete_query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", cow_profile.id);
+
+                    command.ExecuteNonQuery();
+                    Console.WriteLine("Cow with id " + cow_profile.id + " has been deleted...");
+                }
+            }
+
+        }
     }
 }

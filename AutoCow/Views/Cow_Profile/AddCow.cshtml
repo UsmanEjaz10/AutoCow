@@ -1,0 +1,33 @@
+﻿@model Cow_profile
+
+@{
+    ViewBag.Title = "Add Cow Data";
+}
+
+<h2>Add Cow</h2>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.id, "ID:")
+        @Html.TextBoxFor(m => m.id, new { @class = "form-control" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.type, "Type:")
+        @Html.TextBoxFor(m => m.type, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.color, "Color:")
+        @Html.TextBoxFor(m => m.color, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.price, "Disease:")
+        @Html.TextBoxFor(m => m.price, new { @class = "form-control" })
+    </div>
+
+    <input type="submit" class="btn btn-primary">
+}
