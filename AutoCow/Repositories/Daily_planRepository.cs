@@ -72,7 +72,7 @@ namespace AutoCow.Repositories
                             Daily_plan daily_plan = new Daily_plan();
                             daily_plan.count_condition = (int)reader["count"];
                             daily_plan.condition = reader["condition"].ToString();
-                            Console.WriteLine(daily_plan.condition.ToString() + " -------------Milk: " + daily_plan.count_condition + "------------Type: " + daily_plan.type);
+                            Console.WriteLine(daily_plan.condition.ToString() + " -------------: " + daily_plan.count_condition);
                             daily_planList.Add(daily_plan);
                         }
                     }
@@ -113,8 +113,8 @@ namespace AutoCow.Repositories
 
 
                     // Create the SQL query to insert values into the table
-                    string query = "INSERT INTO daily_plan (id, date, milk, temperature, disease, insemination, condition, weight, type) " +
-                       "VALUES (@id, @date, @milk, @temperature, @disease, @insemination, @condition, 200, @type)";
+                    string query = "INSERT INTO daily_plan (id, date, milk, temperature, disease, insemination, condition, weight, type, heart_rate, respiratory_rate) " +
+                       "VALUES (@id, @date, @milk, @temperature, @disease, @insemination, @condition, 200, @type, @heart, @respiratory)";
 
                 // Create a new SqlCommand using the query and the connection
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -128,6 +128,8 @@ namespace AutoCow.Repositories
                     command.Parameters.AddWithValue("@insemination", dailyPlan.insemination);
                     command.Parameters.AddWithValue("@condition", dailyPlan.condition);
                     command.Parameters.AddWithValue("@type", dailyPlan.type);
+                    command.Parameters.AddWithValue("@heart", dailyPlan.heart_rate);
+                    command.Parameters.AddWithValue("@respiratory", dailyPlan.respiratory_rate);
 
 
                     // Execute the SQL query

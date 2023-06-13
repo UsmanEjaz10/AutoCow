@@ -43,6 +43,36 @@ namespace AutoCow.Repositories
 
             return productionDataList;
         }
+
+
+        // Returns the average daily milk produced by the cows. It helps to identify whether the milk produced today was higher or lower than the lasts ones //
+        public int averageProduction()
+        {
+            int avg = 0;
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+
+                connection.Open();
+                DateTime endDate = DateTime.Now;
+                DateTime startDate = endDate.AddDays(-7);
+                string query = "select AVG(milk_production) as average_milk FROM production where date BETWEEN @startDate AND @endDate";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@StartDate", startDate);
+                    command.Parameters.AddWithValue("@EndDate", endDate);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            avg = (int)reader["average_milk"];
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            return avg;
+        }
     }
 
 }

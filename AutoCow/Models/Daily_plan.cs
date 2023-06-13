@@ -11,6 +11,10 @@
         public string condition { get; set; }
         public string type { get; set; }
 
+        public int respiratory_rate { get; set; }
+
+        public int heart_rate { get; set; }
+
         public int total { get; set; }
 
         public int count_condition { get; set; }

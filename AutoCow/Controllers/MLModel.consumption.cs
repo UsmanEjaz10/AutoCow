@@ -15,32 +15,23 @@ namespace AutoCow
         #region model input class
         public class ModelInput
         {
-            [ColumnName(@"id")]
-            public float Id { get; set; }
+            [ColumnName(@"body_temperature")]
+            public float Body_temperature { get; set; }
 
-            [ColumnName(@"date")]
-            public DateTime Date { get; set; }
+            [ColumnName(@"breed_type")]
+            public string Breed_type { get; set; }
 
-            [ColumnName(@"milk")]
-            public float Milk { get; set; }
+            [ColumnName(@"milk_production")]
+            public float Milk_production { get; set; }
 
-            [ColumnName(@"temperature")]
-            public float Temperature { get; set; }
+            [ColumnName(@"respiratory_rate")]
+            public float Respiratory_rate { get; set; }
 
-            [ColumnName(@"insemination")]
-            public string Insemination { get; set; }
+            [ColumnName(@"heart_rate")]
+            public float Heart_rate { get; set; }
 
-            [ColumnName(@"disease")]
-            public string Disease { get; set; }
-
-            [ColumnName(@"condition")]
-            public string Condition { get; set; }
-
-            [ColumnName(@"weight")]
-            public float Weight { get; set; }
-
-            [ColumnName(@"type")]
-            public string Type { get; set; }
+            [ColumnName(@"health_status")]
+            public string Health_status { get; set; }
 
         }
 
@@ -52,32 +43,23 @@ namespace AutoCow
         #region model output class
         public class ModelOutput
         {
-            [ColumnName(@"id")]
-            public float Id { get; set; }
+            [ColumnName(@"body_temperature")]
+            public float Body_temperature { get; set; }
 
-            [ColumnName(@"date")]
-            public DateTime Date { get; set; }
+            [ColumnName(@"breed_type")]
+            public float[] Breed_type { get; set; }
 
-            [ColumnName(@"milk")]
-            public float Milk { get; set; }
+            [ColumnName(@"milk_production")]
+            public float Milk_production { get; set; }
 
-            [ColumnName(@"temperature")]
-            public float Temperature { get; set; }
+            [ColumnName(@"respiratory_rate")]
+            public float Respiratory_rate { get; set; }
 
-            [ColumnName(@"insemination")]
-            public float[] Insemination { get; set; }
+            [ColumnName(@"heart_rate")]
+            public float Heart_rate { get; set; }
 
-            [ColumnName(@"disease")]
-            public float[] Disease { get; set; }
-
-            [ColumnName(@"condition")]
-            public uint Condition { get; set; }
-
-            [ColumnName(@"weight")]
-            public float Weight { get; set; }
-
-            [ColumnName(@"type")]
-            public string Type { get; set; }
+            [ColumnName(@"health_status")]
+            public uint Health_status { get; set; }
 
             [ColumnName(@"Features")]
             public float[] Features { get; set; }

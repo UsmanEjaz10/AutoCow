@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "IHEOYt6BIrRs0IqnZCm7QCgHnIozVhN6yFgO7gjW9NPd+rsKggN3jKYIEqFPZfTOzmmX9iASoyhrJhXVUaJk6w==",
+  "dgSpecHash": "QHh5FpBGMDP2kIz8Tx88Fq7nm7dgzIIl+fwi1B80OLCG4cmzWZJ4WHlfEiyJB8ShUs8cxh/hOokuGk1t4lTFaw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\AutoCow.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lenovo\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\lightgbm\\2.3.1\\lightgbm.2.3.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
@@ -33,6 +34,8 @@
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.ml\\2.0.1\\microsoft.ml.2.0.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.ml.cpumath\\2.0.1\\microsoft.ml.cpumath.2.0.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.ml.dataview\\2.0.1\\microsoft.ml.dataview.2.0.1.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.ml.fasttree\\1.7.1\\microsoft.ml.fasttree.1.7.1.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.ml.lightgbm\\1.7.1\\microsoft.ml.lightgbm.1.7.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.ml.mkl.redist\\1.7.1\\microsoft.ml.mkl.redist.1.7.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.ml.timeseries\\1.7.1\\microsoft.ml.timeseries.1.7.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",

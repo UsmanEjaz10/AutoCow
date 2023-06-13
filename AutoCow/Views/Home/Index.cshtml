@@ -2,6 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    
 }
 
 
@@ -206,6 +207,7 @@
                         </div>
                     </div>
                 </div>
+                <!--Total Milk production-->
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
@@ -223,23 +225,29 @@
                         </div>
                     </div>
                 </div>
+
+                <!----------------------------------------------------Emergency Cases--------------------------------------------------------->
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div class="card">
-                        <div class="card-header p-3 pt-2">
+                        <div class="card-header p-3 pt-2" id="medical" onclick="return change()">
                             <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
                                 <i class="material-icons opacity-10">medical_services</i>
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Emergency Cases</p>
-                                <h4 class="mb-0" id="TotalAlerts"></h4>
+                                <h4 class="mb-0" id="alerts"></h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
-                        <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-danger text-sm font-weight-bolder"></span> today</p>
+                        <div class="card-footer p-3" id="cases">
+                            <p class="mb-0"> Critical &nbsp;<span class="text-danger text-sm font-weight-bolder" id="critical_no">-</span></p>
+                            <p class="mb-0"> Unhealthy &nbsp;<span class="text-warning text-sm font-weight-bolder" id="unhealthy_no">-</span></p>
+
                         </div>
                     </div>
                 </div>
+
+                <!----------------------------------------------------------Sales----------------------------------------------------------->
                 <div class="col-xl-3 col-sm-6">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
@@ -247,13 +255,13 @@
                                 <i class="material-icons opacity-10">weekend</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">Sales</p>
-                                <h4 class="mb-0">$103,430</h4>
+                                <p class="text-sm mb-0 text-capitalize">Today's</p>
+                                <h4 class="mb-0" id="today"></h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday</p>
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder" id="today_avg"> </span>than average</p>
                         </div>
                     </div>
                 </div>
@@ -513,7 +521,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript">
 
-    //Line Chart //
+    //------------------------------------Line Chart---------------------------//
 
     var dates = @Html.Raw(ViewBag.Dates);
     var milkProductions = @Html.Raw(ViewBag.MilkProductions);
@@ -563,15 +571,13 @@
     var sindhi_milk = [];
 
     for (var i = 0; i < bar_dates.length; i++) {
-        if (bar_types[i] == "Sahiwal Cattle") {
+        if (bar_types[i] == "Cross Breed") {
             sahiwal_milk.push(bar_milk[i]);
         }
-        else if (bar_types[i] == "Brahman") {
+        else if (bar_types[i] == "Normal Breed") {
             brahman_milk.push(bar_milk[i]);
         }
-        else if (bar_types[i] == "Red Sindhi") {
-            sindhi_milk.push(bar_milk[i]);
-        }
+        
     }
 
     const unique_dates = [...new Set(bar_dates)];
@@ -585,21 +591,17 @@
             labels: unique_dates,
             datasets: [
                 {
-                    label: 'Sahiwal Cattle',
+                    label: 'Cross Breed',
                     data: sahiwal_milk,
-                    backgroundColor: 'orange'
+                    backgroundColor: 'red'
                     
                 },
                 {
-                    label: 'Brahman',
+                    label: 'Normal Breed',
                     data: brahman_milk,
                     backgroundColor: 'white'
                 },
-                {
-                    label: 'Red Sindhi',
-                    data: sindhi_milk,
-                    backgroundColor: 'red'
-                }
+                
             ]
         },
         options: {
@@ -637,36 +639,62 @@
         Brahman_count += brahman_milk[i];
     }
 
-    for (var i = 0; i < sindhi_milk.length; i++) {
-        Sindhi_count += sindhi_milk[i];
-    }
-
-    var total_milk = Sahiwal_count + Brahman_count + Sindhi_count;
+    
+    var total_milk = Sahiwal_count + Brahman_count;
     var cost = 180;
     var milk_cost = (cost * total_milk)/1000;
     document.getElementById("milk_cost").innerHTML = "Rs " + milk_cost + "k";
 
     document.getElementById("TotalMilk").innerHTML = total_milk + "L";
-    document.getElementById("Sahiwal").innerHTML = "Sahiwal Cattle: " + Sahiwal_count + "L <br>";
-    document.getElementById("Brahman").innerHTML = "Brahman: " + Brahman_count + "L <br>";
-    document.getElementById("Red").innerHTML = "Red Sindhi: " + Sindhi_count + "L <br>";
-
+    
     //-------------------------------------------------------------------------------------------//
 
     var alert_conditions = @Html.Raw(ViewBag.alert_conditions);
     var alert_counts = @Html.Raw(ViewBag.alert_counts);
    
-    var total = 0;
+
+    var total_alerts = 0;
+    var critical = 0;
+    var unhealthy = 0;
     for (var j = 0; j < alert_counts.length; j++) {
-        if (alert_conditions[j] == "Critical") {
-            total += alert_counts[j]; 
+        if (alert_conditions[j] == "critical") {
+            critical += alert_counts[j];
+            total_alerts += alert_counts[j]; 
         }
-        else if (alert_conditions[j] == "Serious") {
-                total += alert_counts[j];     
+        else if (alert_conditions[j] == "unhealthy") {
+                unhealthy += alert_counts[j];
+                total_alerts += alert_counts[j];     
         }
     }
-    document.getElementById("TotalAlerts").innerHTML = alert_counts[0];
 
+    if(total_alerts > 0){
+        var med_notification = document.getElementById("medical");
+        med_notification.style.backgroundColor = "yellow"; 
+        document.getElementById("critical_no").innerHTML = critical;
+        document.getElementById("unhealthy_no").innerHTML = unhealthy;
+    }
+
+    document.getElementById("alerts").innerHTML = total_alerts;
+
+    var averageProduction = @Html.Raw(ViewBag.averageProduction);
+    var today_milk = milkProductions[milkProductions.length -1];
+    var difference = Math.abs(averageProduction - today_milk);
+    document.getElementById("today").innerHTML = today_milk + "L";
+    var today_avg = (difference/averageProduction)*100;
+    if(averageProduction > today_milk){
+    document.getElementById("today_avg").innerHTML = "-" + parseInt(today_avg) + "% ";
+    }
+    else{
+    document.getElementById("today_avg").innerHTML = "+" + parseInt(today_avg) + "% ";
+    }
+
+
+    function change(){
+        document.getElementById("medical").style.background = "#ffffff";
+        document.getElementById("cases").innerHTML = "<p class ='mb-0'> No issues remaining </p>";
+    }
+    
+    
     
 </script>
 

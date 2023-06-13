@@ -2,6 +2,8 @@
 using AutoCow.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System;
 
 namespace AutoCow.Controllers
 {
@@ -34,19 +36,16 @@ namespace AutoCow.Controllers
             //Load sample data
             var sampleData = new MLModel.ModelInput()
             {
-                Id = model.id,
-                Date = DateTime.Now,
-                Milk = model.milk,
-                Temperature = model.temperature,
-                Insemination = model.insemination,
-                Disease = model.disease,
-                Type = type,
+                Body_temperature = model.temperature,
+                Breed_type = type,
+                Milk_production = model.milk,
+                Respiratory_rate = model.respiratory_rate,
+                Heart_rate = model.heart_rate,
             };
 
             //Load model and predict output
             var result = MLModel.Predict(sampleData);
             Console.WriteLine(result.PredictedLabel);
-
             model.condition = result.PredictedLabel;
             model.type = type;
             Cow_profile cow_Profile;
@@ -63,13 +62,61 @@ namespace AutoCow.Controllers
 
             // Perform further processing or store the data in the database
 
-            return RedirectToAction("Index"); // Redirect to a success page
+            return RedirectToAction("~/Views/Home/Index"); // Redirect to a success page
         }
 
-        [Route("Daily/Index")]
-        public ActionResult Success()
+        [Route("Daily/Sensor")]
+        [HttpGet]
+        public ActionResult Sensor()
         {
-            return View();
+            Daily_plan model = new Daily_plan();
+         model.id = 12;
+             model.type = _daily_planRepository.getTypeById(model.id);
+         model.temperature = 39;
+         model.milk = 20;
+         model.respiratory_rate = 20;
+         model.heart_rate = 65;
+           
+            var sampleData = new MLModel.ModelInput()
+            {
+                Body_temperature = model.temperature,
+                Breed_type = model.type,
+                Milk_production = model.milk,
+                Respiratory_rate = model.respiratory_rate,
+                Heart_rate = model.heart_rate,
+            };
+
+            //Load model and predict output
+            var result = MLModel.Predict(sampleData);
+            Console.WriteLine(result.PredictedLabel);
+            model.condition = result.PredictedLabel;
+
+            var jsonString1 = JsonConvert.SerializeObject(model);
+            Console.WriteLine(jsonString1);
+
+            string jsonString = @"
+                {
+                    'id': 12,
+                    'milk': milk,
+                    'temperature' : temp,
+                    'insemination' : N,
+                    'disease' : N,
+                    'type' : type, 
+                    'condition' : condition,
+                    'respiratory_rate': respiratory_rate,
+                    'heart_rate' : heart_rate
+                }"
+            ;
+            Daily_plan daily_Plan = JsonConvert.DeserializeObject<Daily_plan>(jsonString);
+            Console.WriteLine(daily_Plan.id + " " + daily_Plan.type +" " +daily_Plan.milk);
+
+            if (_daily_planRepository.Add(daily_Plan) && _daily_planRepository.AddProduction(daily_Plan))
+            {
+                 _daily_planRepository.UpdateCow_ProfileData(daily_Plan);
+            }
+
+
+            return RedirectToAction("Index");
         }
 
     }

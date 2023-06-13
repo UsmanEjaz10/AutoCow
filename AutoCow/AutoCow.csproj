@@ -31,7 +31,18 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.ML" Version="2.0.1" />
+    <PackageReference Include="Microsoft.ML.FastTree" Version="1.7.1" />
+    <PackageReference Include="Microsoft.ML.LightGbm" Version="1.7.1" />
     <PackageReference Include="Microsoft.ML.TimeSeries" Version="1.7.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup Label="MLModel">
+    <None Include="MLModel.consumption.cs">
+      <DependentUpon>MLModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLModel.training.cs">
+      <DependentUpon>MLModel.mbconfig</DependentUpon>
+    </None>
+    <None Include="MLModel.zip" />
   </ItemGroup>
 </Project>

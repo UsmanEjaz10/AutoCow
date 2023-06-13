@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ML.Data;
+using Microsoft.ML.Trainers.FastTree;
 using Microsoft.ML.Trainers;
 using Microsoft.ML.Transforms;
 using Microsoft.ML;
@@ -35,12 +36,11 @@ namespace AutoCow
         public static IEstimator<ITransformer> BuildPipeline(MLContext mlContext)
         {
             // Data process configuration with pipeline data transformations
-            var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"insemination", @"insemination"),new InputOutputColumnPair(@"disease", @"disease")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
-                                    .Append(mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"milk", @"milk"),new InputOutputColumnPair(@"temperature", @"temperature")}))      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"insemination",@"disease",@"milk",@"temperature"}))      
-                                    .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName:@"condition",inputColumnName:@"condition"))      
-                                    .Append(mlContext.Transforms.NormalizeMinMax(@"Features", @"Features"))      
-                                    .Append(mlContext.MulticlassClassification.Trainers.LbfgsMaximumEntropy(new LbfgsMaximumEntropyMulticlassTrainer.Options(){L1Regularization=1F,L2Regularization=1F,LabelColumnName=@"condition",FeatureColumnName=@"Features"}))      
+            var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(@"breed_type", @"breed_type", outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
+                                    .Append(mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"body_temperature", @"body_temperature"),new InputOutputColumnPair(@"milk_production", @"milk_production"),new InputOutputColumnPair(@"respiratory_rate", @"respiratory_rate"),new InputOutputColumnPair(@"heart_rate", @"heart_rate")}))      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"breed_type",@"body_temperature",@"milk_production",@"respiratory_rate",@"heart_rate"}))      
+                                    .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName:@"health_status",inputColumnName:@"health_status"))      
+                                    .Append(mlContext.MulticlassClassification.Trainers.OneVersusAll(binaryEstimator:mlContext.BinaryClassification.Trainers.FastTree(new FastTreeBinaryTrainer.Options(){NumberOfLeaves=4,MinimumExampleCountPerLeaf=11,NumberOfTrees=87,MaximumBinCountPerFeature=298,FeatureFraction=0.767160343988858,LearningRate=0.999999776672986,LabelColumnName=@"health_status",FeatureColumnName=@"Features"}),labelColumnName: @"health_status"))      
                                     .Append(mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName:@"PredictedLabel",inputColumnName:@"PredictedLabel"));
 
             return pipeline;

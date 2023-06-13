@@ -56,6 +56,9 @@ namespace AutoCow.Controllers
             ViewBag.alert_conditions = JsonConvert.SerializeObject(alert_conditions);
             ViewBag.alert_counts = JsonConvert.SerializeObject(alert_counts);
 
+            ViewBag.averageProduction = _productionRepository.averageProduction();
+            
+
             return View();
         }
 
