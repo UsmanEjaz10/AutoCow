@@ -25,7 +25,8 @@ namespace AutoCow.Controllers
         public ActionResult Index()
         {
 
-            
+            //------------------------------------------------------------------------------------//
+
             List<ProductionData> productionDataList = _productionRepository.GetProductionData();
 
             // Convert the dataset to arrays for use in the view //
@@ -36,7 +37,7 @@ namespace AutoCow.Controllers
             ViewBag.Dates = JsonConvert.SerializeObject(dates);
             ViewBag.MilkProductions = JsonConvert.SerializeObject(milkProductions);
 
-
+            //---------------------------------------------------------------------------------------//
 
             List<Daily_plan> daily_planList = _daily_planRepository.GetDailyData();
 
@@ -48,6 +49,8 @@ namespace AutoCow.Controllers
             ViewBag.bar_milk = JsonConvert.SerializeObject(bar_milk);
             ViewBag.bar_types = JsonConvert.SerializeObject(bar_types);
 
+            //------------------------------------------------------------------------------------------//
+
             List<Daily_plan> condition_countList = _daily_planRepository.GetConditionCount();
 
             var alert_conditions = condition_countList.Select(d => d.condition).ToArray();
@@ -57,7 +60,16 @@ namespace AutoCow.Controllers
             ViewBag.alert_counts = JsonConvert.SerializeObject(alert_counts);
 
             ViewBag.averageProduction = _productionRepository.averageProduction();
-            
+
+            //-----------------------------------------------------------------------------------------//
+
+            List<Daily_plan> leaderboardlist = _daily_planRepository.getLeaderboard();
+            var leaderboard_dates = leaderboardlist.Select(d => d.id).ToArray();
+            var leaderboard_milk = leaderboardlist.Select(d => d.milk).ToArray();
+            var leaderboard_type = leaderboardlist.Select(d => d.type).ToArray();
+
+            ViewBag.leaderboard = leaderboardlist;
+
 
             return View();
         }

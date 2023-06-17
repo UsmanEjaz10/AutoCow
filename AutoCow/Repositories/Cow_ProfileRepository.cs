@@ -1,5 +1,6 @@
 ﻿using AutoCow.Models;
 using Microsoft.Data.SqlClient;
+using System.IO.Pipelines;
 
 namespace AutoCow.Repositories
 {
@@ -34,10 +35,13 @@ namespace AutoCow.Repositories
                             cow_profile.type = reader["type"].ToString();
                             cow_profile.price = (int)reader["price"];
                             cow_profile.color = reader["color"].ToString();
-                            
-                        //    cow_profile.avg_milk = (int)reader["avg_milk"];
-                        //    cow_profile.avg_temperature = (int)reader["avg_temp"];
-                        //    cow_profile.category = reader["category"].ToString();
+                            cow_profile.avg_milk = (int)reader["avg_milk"];
+                            cow_profile.avg_temperature = (int)reader["avg_temp"];
+                            cow_profile.category = reader["category"].ToString();
+
+                            //    cow_profile.avg_milk = (int)reader["avg_milk"];
+                            //    cow_profile.avg_temperature = (int)reader["avg_temp"];
+                            //    cow_profile.category = reader["category"].ToString();
                             Console.WriteLine(cow_profile.id + " " + cow_profile.type + "  of price = " + cow_profile.price + " entered into cow_profile db");
                             cow_profileList.Add(cow_profile);
                         }

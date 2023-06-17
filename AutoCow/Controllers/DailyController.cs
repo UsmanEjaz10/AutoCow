@@ -62,8 +62,13 @@ namespace AutoCow.Controllers
 
             // Perform further processing or store the data in the database
 
-            return RedirectToAction("~/Views/Home/Index"); // Redirect to a success page
+            return RedirectToAction("Index", "Home"); // Redirect to a success page
         }
+
+
+
+
+
 
         [Route("Daily/Sensor")]
         [HttpGet]
@@ -76,6 +81,8 @@ namespace AutoCow.Controllers
          model.milk = 20;
          model.respiratory_rate = 20;
          model.heart_rate = 65;
+            model.disease = "N";
+            model.insemination = "N";
            
             var sampleData = new MLModel.ModelInput()
             {
@@ -94,20 +101,8 @@ namespace AutoCow.Controllers
             var jsonString1 = JsonConvert.SerializeObject(model);
             Console.WriteLine(jsonString1);
 
-            string jsonString = @"
-                {
-                    'id': 12,
-                    'milk': milk,
-                    'temperature' : temp,
-                    'insemination' : N,
-                    'disease' : N,
-                    'type' : type, 
-                    'condition' : condition,
-                    'respiratory_rate': respiratory_rate,
-                    'heart_rate' : heart_rate
-                }"
-            ;
-            Daily_plan daily_Plan = JsonConvert.DeserializeObject<Daily_plan>(jsonString);
+            
+            Daily_plan daily_Plan = JsonConvert.DeserializeObject<Daily_plan>(jsonString1);
             Console.WriteLine(daily_Plan.id + " " + daily_Plan.type +" " +daily_Plan.milk);
 
             if (_daily_planRepository.Add(daily_Plan) && _daily_planRepository.AddProduction(daily_Plan))

@@ -10,6 +10,10 @@
     <Compile Remove="Models\MLModel.training.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\images\dashboard\circle.svg" />
+    <None Include="wwwroot\images\file-icons\icon-3.svg" />
+    <None Include="wwwroot\images\file-icons\icon-google.svg" />
+    <None Include="wwwroot\images\samples\weather.svg" />
     <None Include="wwwroot\js\core\bootstrap.bundle.min.js" />
     <None Include="wwwroot\js\core\bootstrap.min.js" />
     <None Include="wwwroot\js\core\popper.min.js" />

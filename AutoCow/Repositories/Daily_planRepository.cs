@@ -1,5 +1,6 @@
 ﻿using AutoCow.Models;
 using Microsoft.Data.SqlClient;
+using System.Collections.Specialized;
 using System.Numerics;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
@@ -42,7 +43,7 @@ namespace AutoCow.Repositories
                             daily_plan.date = (DateTime)reader["date"];
                             daily_plan.total = (int)reader["total"];
                             daily_plan.type = reader["type"].ToString();
-                            Console.WriteLine(daily_plan.date.ToString() + " -------------Milk: " + daily_plan.total +  "------------Type: "+daily_plan.type);
+                            Console.WriteLine(daily_plan.date.ToString() + " -------------Milk: " + daily_plan.total + "------------Type: " + daily_plan.type);
                             daily_planList.Add(daily_plan);
                         }
                     }
@@ -112,9 +113,9 @@ namespace AutoCow.Repositories
                 }
 
 
-                    // Create the SQL query to insert values into the table
-                    string query = "INSERT INTO daily_plan (id, date, milk, temperature, disease, insemination, condition, weight, type, heart_rate, respiratory_rate) " +
-                       "VALUES (@id, @date, @milk, @temperature, @disease, @insemination, @condition, 200, @type, @heart, @respiratory)";
+                // Create the SQL query to insert values into the table
+                string query = "INSERT INTO daily_plan (id, date, milk, temperature, disease, insemination, condition, weight, type, heart_rate, respiratory_rate) " +
+                   "VALUES (@id, @date, @milk, @temperature, @disease, @insemination, @condition, 200, @type, @heart, @respiratory)";
 
                 // Create a new SqlCommand using the query and the connection
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -159,7 +160,7 @@ namespace AutoCow.Repositories
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
-                        { 
+                        {
                             reader.Close();
                             string update_query = "UPDATE production SET milk_production = milk_production + (SELECT milk FROM daily_plan WHERE date = CAST(GETDATE() AS DATE) and id = @ID ) WHERE date = CAST(GETDATE() AS DATE)";
                             using (SqlCommand update = new SqlCommand(update_query, connection))
@@ -180,18 +181,18 @@ namespace AutoCow.Repositories
                         reader.Close();
                     }
 
-                        string first_entry = "INSERT INTO production (date, milk_production) VALUES(@date, @milk)";
-                        using (SqlCommand insert = new SqlCommand(first_entry, connection))
-                        {
-              
-                            insert.Parameters.AddWithValue("@date", DateTime.Now);
-                            insert.Parameters.AddWithValue("@milk", dailyPlan.milk);
+                    string first_entry = "INSERT INTO production (date, milk_production) VALUES(@date, @milk)";
+                    using (SqlCommand insert = new SqlCommand(first_entry, connection))
+                    {
 
-                            insert.ExecuteNonQuery();
-                            Console.WriteLine("Insertion Executed....");
-                            return true;
-                        }
-                    
+                        insert.Parameters.AddWithValue("@date", DateTime.Now);
+                        insert.Parameters.AddWithValue("@milk", dailyPlan.milk);
+
+                        insert.ExecuteNonQuery();
+                        Console.WriteLine("Insertion Executed....");
+                        return true;
+                    }
+
 
                 }
             }
@@ -241,10 +242,10 @@ namespace AutoCow.Repositories
                     command.Parameters.AddWithValue("@id", profile.id);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        if(reader.Read())
+                        if (reader.Read())
                         {
                             cow_Profile.avg_milk = (int)reader["average_milk"];
-                            cow_Profile.avg_temperature =(int)reader["average_temp"];
+                            cow_Profile.avg_temperature = (int)reader["average_temp"];
 
                             reader.Close();
                             string insertQuery = "Update cow_profile set avg_milk = @avg_milk, avg_temp = @avg_temp where id = @cow_id";
@@ -257,7 +258,7 @@ namespace AutoCow.Repositories
 
                                 insert.ExecuteNonQuery();
                                 Console.WriteLine("Insertion Executed...Avg.");
-                                
+
                             }
 
                         }
@@ -287,6 +288,39 @@ namespace AutoCow.Repositories
                 }
             }
         }
+
+
+        public List<Daily_plan> getLeaderboard()
+        {
+            List<Daily_plan> leaderboard = new List<Daily_plan>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT id, type, SUM(milk) AS total_milk FROM daily_plan WHERE date >= DATEADD(DAY, -7, GETDATE()) GROUP BY id, type Order by total_milk";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            Daily_plan data = new Daily_plan();
+                            data.id = (int)reader["id"];
+                            data.milk = (int)reader["total_milk"];
+                            data.type = reader["type"].ToString();
+                            Console.WriteLine("cow id = " + data.id + " type = "+ data.type +"  and milk = " + data.milk);
+                            leaderboard.Add(data);
+                        }
+
+                        reader.Close();
+                    }
+                }
+
+                return leaderboard;
+            }
+        }
+
     }
-    
 }
+
