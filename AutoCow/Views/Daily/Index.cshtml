@@ -6,50 +6,73 @@
 
 @model Daily_plan
 
-@{
-    ViewBag.Title = "Add | Daily_Data";
+@section title{
+<title>
+    Add | Daily Entry
+</title>
 }
 
-<h2>Info Form</h2>
 
-@using (Html.BeginForm(FormMethod.Post))
-{
-    <div class="form-group">
-        @Html.LabelFor(m => m.id, "ID:")
-        @Html.TextBoxFor(m => m.id, new { @class = "form-control" })
-    </div>
-
-    
-    <div class="form-group">
-        @Html.LabelFor(m => m.milk, "Milk:")
-        @Html.TextBoxFor(m => m.milk, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.temperature, "Temperature:")
-        @Html.TextBoxFor(m => m.temperature, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.disease, "Disease:")
-        @Html.TextBoxFor(m => m.disease, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.insemination, "Insemination:")
-        @Html.TextBoxFor(m => m.insemination, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.heart_rate, "Heart_rate:")
-        @Html.TextBoxFor(m => m.heart_rate, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.respiratory_rate, "Respiratory_rate:")
-        @Html.TextBoxFor(m => m.respiratory_rate, new { @class = "form-control" })
-    </div>
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6 col-md-8">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Daily Entry</h6>
+                
+                    @using (Html.BeginForm(FormMethod.Post))
+                    {
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(m => m.id, "ID:", htmlAttributes: new {@class = "form-label"})
+                            @Html.TextBoxFor(m => m.id, new { @class = "form-control" })
+                        </div>
 
 
-    <input type="submit" class="btn btn-primary">
-}
+                        <div class="form-group mb-3">
+                        @Html.LabelFor(m => m.milk, "Milk:", htmlAttributes: new {@class = "form-label"})
+                            @Html.TextBoxFor(m => m.milk, new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group mb-3">
+                        @Html.LabelFor(m => m.temperature, "Temperature:", htmlAttributes: new {@class = "form-label"})
+                            @Html.TextBoxFor(m => m.temperature, new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group mb-3">
+                        @Html.LabelFor(m => m.disease, "Disease:", htmlAttributes: new {@class = "form-label"})
+                            @Html.TextBoxFor(m => m.disease, new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group mb-3">
+                        @Html.LabelFor(m => m.insemination, "Insemination:", htmlAttributes: new {@class = "form-label"})
+                            @Html.TextBoxFor(m => m.insemination, new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group mb-3">
+                        @Html.LabelFor(m => m.heart_rate, "Heart_rate:", htmlAttributes: new {@class = "form-label"})
+                            @Html.TextBoxFor(m => m.heart_rate, new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group mb-3">
+                        @Html.LabelFor(m => m.respiratory_rate, "Respiratory_rate:", htmlAttributes: new {@class = "form-label"})
+                            @Html.TextBoxFor(m => m.respiratory_rate, new { @class = "form-control" })
+                        </div>
+
+
+                        <input type="submit" class="btn btn-primary">
+                    }
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-xl-6">
+            <div class="h-50 bg-secondary rounded">
+                <div class="d-flex align-items-center justify-content-between mb-2 p-4">
+                    <h6 class="mb-0">Calender</h6>
+                    <a href="">Show All</a>
+                </div>
+                <div id="calender"></div>
+            </div>
+        </div>
+        </div>
+
+        </div>
+

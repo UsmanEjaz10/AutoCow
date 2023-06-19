@@ -1,21 +1,57 @@
 ﻿@using AutoCow.Models
 @model Cow_profile
-@{
-    ViewData["title"] = "Cow | Handle";
-    
+
+@section title{
+    <title>
+        All Cows | Registered
+    </title>
 }
 
+
+<div class="col-sm-12 col-xl-12 mt-2">
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Latest Entry</h6>
+        <div class="owl-carousel testimonial-carousel">
+            <div class="testimonial-item text-center">
+                <img class="img-fluid  mx-auto mb-4" src="~/images/cow3.jpg" style="width: 350px; height: 250px;">
+                <h5 class="mb-1">Cow id: @ViewBag.Cows[0].id</h5>
+                <p>@ViewBag.Cows[0].type</p>
+                <p class="mb-0">With color @ViewBag.Cows[0].color is up for @ViewBag.Cows[0].price . It provides with an average milk of @ViewBag.Cows[0].avg_milk L </p>
+            </div>
+            <div class="testimonial-item text-center">
+                <img class="img-fluid rounded-circle mx-auto mb-4" src="~/images/cow_logo.jpg" style="width: 150px; height: 150px;">
+                <h5 class="mb-1">Want to Add a cow?</h5>
+                <button asp-controller="Cow_Profile" asp-action="Add" id="AddCow" class="btn btn-dark text-light mb-3 align-content-end">
+                    <a href="Add">Add</a>
+                </button>
+
+                <p class="mb-0">Let's add another one into the bucket. The more there are the better it will be. '</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<br />
+<br />
 <button id="convertButton" class="btn btn-primary mb-3 align-content-end">Convert to Table</button>
 <button id="convertToCards" class="btn btn-primary mb-3 align-content-end">Convert to Cards</button>
-<button id="AddCow" class="btn btn-primary mb-3 align-content-end"><a href="Add">Add</a>
-</button>
 
 
-<div class="row" id="cardContainer">
+<div class="row m-2" id="cardContainer">
     @foreach (Cow_profile item in ViewBag.Cows)
     {
         <div class="col-md-4">
-        <div class="card shadow-sm mb-3">
+        <div class="card shadow-sm mb-3 bg-secondary">
             <div class="card-body">
                 <h5 class="card-title">Cow:  @item.id</h5>
                 <p class="card-text">Type:  @item.type</p>

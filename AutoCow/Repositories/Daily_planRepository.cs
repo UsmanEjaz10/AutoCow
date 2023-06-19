@@ -297,7 +297,7 @@ namespace AutoCow.Repositories
             {
                 connection.Open();
 
-                string query = "SELECT id, type, SUM(milk) AS total_milk FROM daily_plan WHERE date >= DATEADD(DAY, -7, GETDATE()) GROUP BY id, type Order by total_milk";
+                string query = "SELECT id, type, SUM(milk) AS total_milk FROM daily_plan WHERE date >= DATEADD(DAY, -7, GETDATE()) GROUP BY id, type Order by total_milk DESC";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -320,6 +320,81 @@ namespace AutoCow.Repositories
                 return leaderboard;
             }
         }
+
+
+        public List<Daily_plan> GetDailyDataById(int cow_id)
+        {
+            List<Daily_plan> daily_planlist = new List<Daily_plan>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                DateTime endDate = DateTime.Now;
+                DateTime startDate = endDate.AddDays(-7);
+                string query = "SELECT * FROM daily_plan where date BETWEEN @startDate AND @endDate and id = @cow_id order by date DESC;";
+
+
+                Console.WriteLine(query);
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@StartDate", startDate);
+                    command.Parameters.AddWithValue("@EndDate", endDate);
+                    command.Parameters.AddWithValue("@cow_id", cow_id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Daily_plan daily_plan = new Daily_plan();
+                            daily_plan.date = (DateTime)reader["date"];
+                            daily_plan.type = reader["type"].ToString();
+                            daily_plan.insemination = reader["insemination"].ToString();
+                            daily_plan.disease = reader["disease"].ToString();
+                            daily_plan.heart_rate = Convert.ToSingle( (decimal)( reader["heart_rate"]));
+                            daily_plan.respiratory_rate = Convert.ToSingle((decimal)reader["respiratory_rate"]);
+                            daily_plan.milk = (int)reader["milk"];
+                            daily_plan.temperature = (int)reader["temperature"];
+                            daily_plan.weight = (int)reader["weight"];
+                            daily_plan.condition = reader["condition"].ToString();
+                            Console.WriteLine(daily_plan.date.ToString() + " -------------Milk: " + daily_plan.milk + "------------Type: " + daily_plan.type);
+                            daily_planlist.Add(daily_plan);
+                        }
+                    }
+                }
+            }
+
+            return daily_planlist;
+        }
+
+        public Daily_plan getTotalMilkWeekly(int id)
+        {
+            Daily_plan data = new Daily_plan();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT id, SUM(milk) AS total_milk FROM daily_plan WHERE date >= DATEADD(DAY, -7, GETDATE()) and id = @cow_id GROUP BY id;";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@cow_id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            data.id = (int)reader["id"];
+                            data.total = (int)reader["total_milk"];
+                            Console.WriteLine("cow id = " + data.id + " type = " + data.type + "  and milk = " + data.milk);
+                            
+                        }
+
+                        reader.Close();
+                    }
+                }
+
+                return data;
+            }
+        }
+
 
     }
 }

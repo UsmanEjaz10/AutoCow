@@ -107,5 +107,48 @@ namespace AutoCow.Repositories
             }
 
         }
+
+
+        public Cow_profile GetCowById(int cow_id)
+        {
+            Cow_profile cow_profile = new Cow_profile();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM cow_profile where id= @cow_id";
+
+
+                Console.WriteLine(query);
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@cow_id", cow_id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            cow_profile.id = (int)reader["id"];
+                            cow_profile.type = reader["type"].ToString();
+                            cow_profile.price = (int)reader["price"];
+                            cow_profile.color = reader["color"].ToString();
+                            cow_profile.avg_milk = (int)reader["avg_milk"];
+                            cow_profile.avg_temperature = (int)reader["avg_temp"];
+                            cow_profile.category = reader["category"].ToString();
+
+                            //    cow_profile.avg_milk = (int)reader["avg_milk"];
+                            //    cow_profile.avg_temperature = (int)reader["avg_temp"];
+                            //    cow_profile.category = reader["category"].ToString();
+                            Console.WriteLine(cow_profile.id + " " + cow_profile.type + "  of price = " + cow_profile.price + " from cow_profile db");
+                            
+                        }
+                    }
+                }
+            }
+
+            return cow_profile;
+        }
+
+
+        
     }
 }

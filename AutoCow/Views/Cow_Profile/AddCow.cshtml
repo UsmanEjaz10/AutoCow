@@ -1,33 +1,49 @@
 ﻿@model Cow_profile
 
-@{
-    ViewBag.Title = "Add Cow Data";
+@section title{
+    <title>
+        Add | Cow
+    </title>
 }
 
 <h2>Add Cow</h2>
 
-@using (Html.BeginForm(FormMethod.Post))
-{
-    <div class="form-group">
-        @Html.LabelFor(m => m.id, "ID:")
-        @Html.TextBoxFor(m => m.id, new { @class = "form-control" })
-    </div>
 
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.type, "Type:")
-        @Html.TextBoxFor(m => m.type, new { @class = "form-control" })
-    </div>
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-9 col-md-8">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Daily Entry</h6>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.color, "Color:")
-        @Html.TextBoxFor(m => m.color, new { @class = "form-control" })
-    </div>
+                @using (Html.BeginForm(FormMethod.Post))
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.id, "ID:" , htmlAttributes: new {@class = "form-label"})
+                        @Html.TextBoxFor(m => m.id, new { @class = "form-control" })
+                    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.price, "Disease:")
-        @Html.TextBoxFor(m => m.price, new { @class = "form-control" })
-    </div>
 
-    <input type="submit" class="btn btn-primary">
-}
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.type, "Type:" , htmlAttributes: new {@class = "form-label"})
+                        @Html.TextBoxFor(m => m.type, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.color, "Color:" , htmlAttributes: new {@class = "form-label"})
+                        @Html.TextBoxFor(m => m.color, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.price, "Price:" , htmlAttributes: new {@class = "form-label"})
+                        @Html.TextBoxFor(m => m.price, new { @class = "form-control" })
+                    </div>
+
+                    <input type="submit" class="btn btn-primary">
+                
+
+                }
+            </div>
+        </div>
+
+

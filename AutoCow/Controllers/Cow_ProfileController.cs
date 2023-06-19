@@ -73,6 +73,23 @@ namespace AutoCow.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("Cow_Profile/Profile")]
 
+        public IActionResult Profile(int id) {
+
+            Cow_profile cow_Profile = _cow_profileRepository.GetCowById(id);
+            List<Daily_plan> plans = _daily_planRepository.GetDailyDataById(id);
+            Daily_plan weekly_milk = _daily_planRepository.getTotalMilkWeekly(id);
+
+
+            Console.WriteLine("Condition = " + plans[0].condition);
+
+            ViewBag.profile = cow_Profile;
+            ViewBag.plans = plans;
+            ViewBag.weekly_milk = weekly_milk;
+
+
+            return View();
+        }
     }
 }

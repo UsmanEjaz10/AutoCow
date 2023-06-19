@@ -5,8 +5,16 @@
       "PackagePath": "staticwebassets\\AutoCow.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\css\\Cow_Profile.css",
+      "PackagePath": "staticwebassets\\css\\Cow_Profile.css"
+    },
+    {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\css\\bootstrap-datepicker.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap-datepicker.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },
     {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\css\\flag-icon.min.css",
@@ -15,6 +23,10 @@
     {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\css\\font-awesome.min.css",
       "PackagePath": "staticwebassets\\css\\font-awesome.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\css\\leaderboardStyle.css",
+      "PackagePath": "staticwebassets\\css\\leaderboardStyle.css"
     },
     {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\css\\material-dashboard.css",
@@ -45,6 +57,10 @@
       "PackagePath": "staticwebassets\\css\\nucleo-svg.css"
     },
     {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\css\\owl.carousel.min.css",
+      "PackagePath": "staticwebassets\\css\\owl.carousel.min.css"
+    },
+    {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\css\\sb-admin-2.css",
       "PackagePath": "staticwebassets\\css\\sb-admin-2.css"
     },
@@ -65,12 +81,24 @@
       "PackagePath": "staticwebassets\\css\\style.css.map"
     },
     {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\css\\templatestyle.css",
+      "PackagePath": "staticwebassets\\css\\templatestyle.css"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\css\\tempusdominus-bootstrap-4.min.css",
+      "PackagePath": "staticwebassets\\css\\tempusdominus-bootstrap-4.min.css"
+    },
+    {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\css\\vendor.bundle.base.css",
       "PackagePath": "staticwebassets\\css\\vendor.bundle.base.css"
     },
     {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\admin_profile.jpg",
+      "PackagePath": "staticwebassets\\images\\admin_profile.jpg"
     },
     {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\auth\\lockscreen-bg.jpg",
@@ -179,6 +207,18 @@
     {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\chat\\thumb_image8.jpg",
       "PackagePath": "staticwebassets\\images\\chat\\thumb_image8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\cow1.jpg",
+      "PackagePath": "staticwebassets\\images\\cow1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\cow2.jpg",
+      "PackagePath": "staticwebassets\\images\\cow2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\cow3.jpg",
+      "PackagePath": "staticwebassets\\images\\cow3.jpg"
     },
     {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\cow_logo.jpg",
@@ -1005,6 +1045,10 @@
       "PackagePath": "staticwebassets\\js\\jquery-easing\\jquery.easing.min.js"
     },
     {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
+    },
+    {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\js\\material-dashboard.js",
       "PackagePath": "staticwebassets\\js\\material-dashboard.js"
     },
@@ -1033,12 +1077,36 @@
       "PackagePath": "staticwebassets\\js\\plugins\\countup.min.js"
     },
     {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\js\\plugins\\easing.min.js",
+      "PackagePath": "staticwebassets\\js\\plugins\\easing.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\js\\plugins\\moment-timezone.min.js",
+      "PackagePath": "staticwebassets\\js\\plugins\\moment-timezone.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\js\\plugins\\moment.min.js",
+      "PackagePath": "staticwebassets\\js\\plugins\\moment.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\js\\plugins\\owl.carousel.min.js",
+      "PackagePath": "staticwebassets\\js\\plugins\\owl.carousel.min.js"
+    },
+    {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\js\\plugins\\perfect-scrollbar.min.js",
       "PackagePath": "staticwebassets\\js\\plugins\\perfect-scrollbar.min.js"
     },
     {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\js\\plugins\\smooth-scrollbar.min.js",
       "PackagePath": "staticwebassets\\js\\plugins\\smooth-scrollbar.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\js\\plugins\\tempusdominus-bootstrap-4.min.js",
+      "PackagePath": "staticwebassets\\js\\plugins\\tempusdominus-bootstrap-4.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\js\\plugins\\waypoints.min.js",
+      "PackagePath": "staticwebassets\\js\\plugins\\waypoints.min.js"
     },
     {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\js\\plugins\\world.js",

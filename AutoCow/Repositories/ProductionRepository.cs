@@ -73,6 +73,35 @@ namespace AutoCow.Repositories
             }
             return avg;
         }
-    }
+
+
+		public List<ProductionData> GetAllTimeProductionData()
+		{
+			List<ProductionData> productionDataList = new List<ProductionData>();
+
+			using (SqlConnection connection = new SqlConnection(_connectionString))
+			{
+				connection.Open();
+				string query = "SELECT date, milk_production FROM Production where date >= DATEADD(DAY, -10, GETDATE())";
+
+				using (SqlCommand command = new SqlCommand(query, connection))
+				{
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							ProductionData productionData = new ProductionData();
+							productionData.Date = (DateTime)reader["date"];
+							productionData.MilkProduction = (int)reader["milk_production"];
+							productionDataList.Add(productionData);
+						}
+					}
+				}
+			}
+
+			return productionDataList;
+		}
+
+	}
 
 }

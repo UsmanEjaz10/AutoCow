@@ -11,9 +11,10 @@
         public string condition { get; set; }
         public string type { get; set; }
 
-        public int respiratory_rate { get; set; }
+        public int weight { get; set; }
+        public float respiratory_rate { get; set; }
 
-        public int heart_rate { get; set; }
+        public float heart_rate { get; set; }
 
         public int total { get; set; }
 

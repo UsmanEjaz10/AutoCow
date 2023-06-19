@@ -5,6 +5,8 @@ using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using Newtonsoft.Json;
 using Microsoft.ML;
+using Microsoft.ML.Transforms.TimeSeries;
+
 namespace AutoCow.Controllers
 {
     public class HomeController : Controller
@@ -75,11 +77,50 @@ namespace AutoCow.Controllers
         }
 
         [Route("privacy")]
-        public ActionResult Privacy() { return View(); }
+        public ActionResult Privacy() {
+
+            var context = new MLContext();
+            var productionData = _productionRepository.GetAllTimeProductionData();
+            foreach(var i in productionData)
+            {
+                Console.WriteLine(i.MilkProduction);
+            }
+            var dataView = context.Data.LoadFromEnumerable(productionData);
+
+            var pipline = context.Forecasting.ForecastBySsa(
+                "Forecast",
+                nameof(ProductionData.MilkProduction),
+                windowSize: 2,
+                seriesLength: 3,
+                trainSize: 5,
+                horizon: 10
+                ) ;
+            var model = pipline.Fit(dataView);
+            var forecastingEngine = model.CreateTimeSeriesEngine<ProductionData, ProductionPredictor>(context);
+            var forecasts = forecastingEngine.Predict();
+
+            foreach(var i in forecasts.Forecast)
+            {
+                Console.WriteLine(i);
+            }
+
+
+            return View();
+        }
 
 
         [Route("dashboard")]
-        public ActionResult Dashboard() { return View(); }
+        public ActionResult Dashboard() {
+
+			List<Daily_plan> leaderboardlist = _daily_planRepository.getLeaderboard();
+			var leaderboard_dates = leaderboardlist.Select(d => d.id).ToArray();
+			var leaderboard_milk = leaderboardlist.Select(d => d.milk).ToArray();
+			var leaderboard_type = leaderboardlist.Select(d => d.type).ToArray();
+
+			ViewBag.leaderboard = leaderboardlist;
+
+			return View();
+        }
 
         [Route("d")]
         public ActionResult Index1() { return View(); }

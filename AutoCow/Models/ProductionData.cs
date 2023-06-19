@@ -3,7 +3,7 @@
     public class ProductionData
     {
         public DateTime Date { get; set; }
-        public int MilkProduction { get; set; }
+        public float MilkProduction { get; set; }
 
     }
 
