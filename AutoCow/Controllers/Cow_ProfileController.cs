@@ -31,34 +31,9 @@ namespace AutoCow.Controllers
             return View(new Cow_profile());
         }
 
-        [Route("Cow_Profile/Index")]
-        [HttpPost]
-        public ActionResult Index(Cow_profile form)
-        {
-            Cow_profile profile = new Cow_profile();
-            profile.id = Convert.ToInt32(form.id);
-            profile.price = Convert.ToInt32(form.price);
-            profile.type  = Convert.ToString(form.type);
-            profile.color = Convert.ToString(form.color);
-            profile.avg_milk = Convert.ToInt32(form.avg_milk);
-            profile.avg_temperature = Convert.ToInt32(form.avg_temperature);
-            profile.category = Convert.ToString(form.category);
 
-            Console.WriteLine(profile.id + " " + profile.avg_milk);
-         //   String action  = Convert.ToString(form["action"]);
-         /*   if(action == "update")
-            {
-                ViewBag.cow_profile = profile;
-                return RedirectToAction("Add");
-            }
-            else if(action == "delete")
-            {
-                _cow_profileRepository.deleteCow(profile);
-                _daily_planRepository.deleteCowDailyData(profile);
-            }
-         */
-            return View();
-        }
+
+        
 
         [Route("Cow_Profile/Add")]
         [HttpGet]
@@ -104,6 +79,15 @@ namespace AutoCow.Controllers
             ViewBag.temperature = JsonConvert.SerializeObject(temperature);
 
             return View();
+        }
+
+        [Route("Cow_Profile/Delete")]
+        public IActionResult deleteCow(int id)
+        {
+            _cow_profileRepository.deleteCow(id);
+            _daily_planRepository.deleteCowDailyData(id);
+
+            return RedirectToAction("Index");
         }
     }
 }

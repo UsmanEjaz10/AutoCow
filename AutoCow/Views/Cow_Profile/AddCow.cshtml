@@ -39,6 +39,22 @@
                         @Html.TextBoxFor(m => m.price, new { @class = "form-control" })
                     </div>
 
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.avg_milk, "Average Milk:" , htmlAttributes: new {@class = "form-label"})
+                        @Html.TextBoxFor(m => m.avg_milk, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.avg_temperature, "Temperature:" , htmlAttributes: new {@class = "form-label"})
+                        @Html.TextBoxFor(m => m.avg_temperature, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.category, "Diet plan:" , htmlAttributes: new {@class = "form-label"})
+                        @Html.TextBoxFor(m => m.category, new { @class = "form-control" })
+                    </div>
+
+
                     <input type="submit" class="btn btn-primary">
                 
 

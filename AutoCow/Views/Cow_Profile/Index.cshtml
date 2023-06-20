@@ -68,9 +68,9 @@
 
                 <div class="d-flex justify-content-between">
                          <input type="submit" value="Update" class="btn btn-primary">
-                        
-                         <input type="submit" value="Delete" class="btn btn-primary">
-                        
+
+                        <button class="btn btn-primary btn-sm "><a asp-controller="Cow_Profile" asp-action="deleteCow" asp-route-id="@item.id" class="text-white">Delete</a></button>
+
                     </div>
                 </div>
             </div>

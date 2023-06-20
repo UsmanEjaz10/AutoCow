@@ -73,13 +73,18 @@ namespace AutoCow.Repositories
                     }
                 }
 
-                string query = "Insert into cow_profile (id, color, type, price) values(@id, @color, @type, @price)";
+                string query = "Insert into cow_profile (id, color, type, price, avg_temp, avg_milk, category) values(@id, @color, @type, @price, @temp, @milk, @category)";
                 using (SqlCommand add = new SqlCommand(query, connection))
                 {
                     add.Parameters.AddWithValue("@id", cow_profile.id);
                     add.Parameters.AddWithValue("@color", cow_profile.color);
                     add.Parameters.AddWithValue("@type", cow_profile.type);
                     add.Parameters.AddWithValue("@price", cow_profile.price);
+                    add.Parameters.AddWithValue("@temp", cow_profile.avg_temperature);
+                    add.Parameters.AddWithValue("@milk", cow_profile.avg_milk);
+                    add.Parameters.AddWithValue("@category", cow_profile.category);
+
+
 
                     add.ExecuteNonQuery();
                     Console.WriteLine("New Cow Added...");
@@ -90,7 +95,7 @@ namespace AutoCow.Repositories
         }
 
 
-        public void deleteCow(Cow_profile cow_profile) {
+        public void deleteCow(int id) {
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -99,10 +104,10 @@ namespace AutoCow.Repositories
 
                 using (SqlCommand command = new SqlCommand(delete_query, connection))
                 {
-                    command.Parameters.AddWithValue("@id", cow_profile.id);
+                    command.Parameters.AddWithValue("@id", id);
 
                     command.ExecuteNonQuery();
-                    Console.WriteLine("Cow with id " + cow_profile.id + " has been deleted...");
+                    Console.WriteLine("Cow with id " + id + " has been deleted...");
                 }
             }
 

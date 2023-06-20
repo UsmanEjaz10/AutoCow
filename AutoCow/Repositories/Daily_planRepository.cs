@@ -272,19 +272,19 @@ namespace AutoCow.Repositories
 
         }
 
-        public void deleteCowDailyData(Cow_profile cow_profile)
+        public void deleteCowDailyData(int id)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                String delete_query = "delete from daily_data where id = @id";
+                String delete_query = "delete from daily_plan where id = @id";
 
                 using (SqlCommand command = new SqlCommand(delete_query, connection))
                 {
-                    command.Parameters.AddWithValue("@id", cow_profile.id);
+                    command.Parameters.AddWithValue("@id", id);
 
                     command.ExecuteNonQuery();
-                    Console.WriteLine("Cow with id " + cow_profile.id + " has been deleted... from daily data");
+                    Console.WriteLine("Cow with id " + id + " has been deleted... from daily data");
                 }
             }
         }
