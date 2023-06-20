@@ -2,6 +2,7 @@
 using AutoCow.Models;
 using AutoCow.Repositories;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace AutoCow.Controllers
 {
@@ -25,6 +26,7 @@ namespace AutoCow.Controllers
             List<Cow_profile> cow_ProfileList = _cow_profileRepository.GetAllCows();
 
             ViewBag.Cows = cow_ProfileList;
+            ViewBag.size = cow_ProfileList.Count;
 
             return View(new Cow_profile());
         }
@@ -88,6 +90,18 @@ namespace AutoCow.Controllers
             ViewBag.plans = plans;
             ViewBag.weekly_milk = weekly_milk;
 
+
+
+            var dates = plans.Select(d => d.date.ToShortDateString()).ToArray();
+            var milk = plans.Select(d => d.milk).ToArray();
+            var temperature = plans.Select(d => d.temperature).ToArray();
+
+
+            Console.WriteLine(dates[0] + " " + milk[0] + " " + temperature[0]);
+
+            ViewBag.dates = JsonConvert.SerializeObject(dates);
+            ViewBag.milk = JsonConvert.SerializeObject(milk);
+            ViewBag.temperature = JsonConvert.SerializeObject(temperature);
 
             return View();
         }

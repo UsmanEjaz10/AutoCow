@@ -10,13 +10,12 @@
 
 <div class="col-sm-12 col-xl-12 mt-2">
     <div class="bg-secondary rounded h-100 p-4">
-        <h6 class="mb-4">Latest Entry</h6>
+        <h6 class="mb-4">Our Special ones</h6>
         <div class="owl-carousel testimonial-carousel">
             <div class="testimonial-item text-center">
-                <img class="img-fluid  mx-auto mb-4" src="~/images/cow3.jpg" style="width: 350px; height: 250px;">
-                <h5 class="mb-1">Cow id: @ViewBag.Cows[0].id</h5>
-                <p>@ViewBag.Cows[0].type</p>
-                <p class="mb-0">With color @ViewBag.Cows[0].color is up for @ViewBag.Cows[0].price . It provides with an average milk of @ViewBag.Cows[0].avg_milk L </p>
+                <img class="img-fluid mx-auto mb-4 w-100 h-100" src="~/images/dairy.png">
+                <h5 class="mb-1">They made us!!!</h5>
+
             </div>
             <div class="testimonial-item text-center">
                 <img class="img-fluid rounded-circle mx-auto mb-4" src="~/images/cow_logo.jpg" style="width: 150px; height: 150px;">
@@ -27,6 +26,13 @@
 
                 <p class="mb-0">Let's add another one into the bucket. The more there are the better it will be. '</p>
             </div>
+            <div class="testimonial-item text-center">
+                <img class="img-fluid rounded-circle mx-auto mb-4" src="~/images/cow3.jpg" style="width: 200px; height: 150px;">
+                <h5 class="mb-1">Cow id: @ViewBag.Cows[ViewBag.size -1].id</h5>
+                <p>@ViewBag.Cows[ViewBag.size -1].type</p>
+                <p class="mb-0">With color @ViewBag.Cows[ViewBag.size -1].color is up for @ViewBag.Cows[ViewBag.size -1].price . It provides with an average milk of @ViewBag.Cows[ViewBag.size -1].avg_milk L </p>
+            </div>
+
         </div>
     </div>
 </div>
@@ -43,8 +49,8 @@
 
 <br />
 <br />
-<button id="convertButton" class="btn btn-primary mb-3 align-content-end">Convert to Table</button>
-<button id="convertToCards" class="btn btn-primary mb-3 align-content-end">Convert to Cards</button>
+<button id="convertButton" class="btn btn-secondary mb-3 align-content-end m-2" style="text-align:end"><i class="fas fa-table me-2"></i></button>
+<button id="convertToCards" class="btn btn-secondary mb-3 align-content-end m-2" style="text-align:end"><i class="fas fa-file me-2"></i></button>
 
 
 <div class="row m-2" id="cardContainer">
@@ -53,31 +59,18 @@
         <div class="col-md-4">
         <div class="card shadow-sm mb-3 bg-secondary">
             <div class="card-body">
-                <h5 class="card-title">Cow:  @item.id</h5>
+                    <h5 class="card-title"><i class="fas fa-hippo me-2"></i>Cow: @item.id</h5>
                 <p class="card-text">Type:  @item.type</p>
-                <p class="card-text">Price: @item.price</p>
-                <p class="card-text">Avg-Milk: @item.avg_milk</p>
+                    <p class="card-text"><i class="fas fa-money me-2"></i>Price: @item.price</p>
+                    <p class="card-text"><i class="fas fa-glass-whiskey me-2"></i>Avg-Milk: @item.avg_milk L </p>
                 <p class="card-text">Avg-Temperature: @item.avg_temperature</p>
                 <p class="card-text">Category: @item.category</p>
 
                 <div class="d-flex justify-content-between">
-                        @using (Html.BeginForm(FormMethod.Post))
-                        {
-                            @Html.Hidden("action" , "update")
-                            <input type="submit" value="Update" class="btn btn-primary">
-                        }
-                        @using (Html.BeginForm(FormMethod.Post))
-                        {
-                            <input type="hidden" name="id" value="@item.id">
-                            <input type="hidden" name="type" value="@item.type">
-                            <input type="hidden" name="price" value="@item.price">
-                            <input type="hidden" name="color" value="@item.color">
-                            <input type="hidden" name="milk" value="@item.avg_milk">
-                            <input type="hidden" name="temp" value="@item.avg_temperature">
-                            <input type="hidden" name="category" value="@item.category">
-                            <input type="hidden" name="action" value="delete">
-                            <input type="submit" value="Delete" class="btn btn-primary">
-                        }
+                         <input type="submit" value="Update" class="btn btn-primary">
+                        
+                         <input type="submit" value="Delete" class="btn btn-primary">
+                        
                     </div>
                 </div>
             </div>

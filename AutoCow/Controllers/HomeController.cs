@@ -66,9 +66,9 @@ namespace AutoCow.Controllers
             //-----------------------------------------------------------------------------------------//
 
             List<Daily_plan> leaderboardlist = _daily_planRepository.getLeaderboard();
-            var leaderboard_dates = leaderboardlist.Select(d => d.id).ToArray();
-            var leaderboard_milk = leaderboardlist.Select(d => d.milk).ToArray();
-            var leaderboard_type = leaderboardlist.Select(d => d.type).ToArray();
+            //var leaderboard_dates = leaderboardlist.Select(d => d.id).ToArray();
+            //var leaderboard_milk = leaderboardlist.Select(d => d.milk).ToArray();
+            //var leaderboard_type = leaderboardlist.Select(d => d.type).ToArray();
 
             ViewBag.leaderboard = leaderboardlist;
 

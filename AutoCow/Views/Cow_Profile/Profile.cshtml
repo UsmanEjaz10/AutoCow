@@ -1,0 +1,300 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@section title{
+    <title>Profile | Cow</title>
+}
+<head><link rel="stylesheet" href="~/css/Cow_Profile.css" asp-append-version="true" />
+</head>
+
+
+
+
+
+<section class="section about-section gray-bg bg-secondary text-light" id="about">
+    <div class="container">
+        <div class="row align-items-center flex-row-reverse">
+            <div class="col-lg-6">
+                <div class="about-text go-to text-white">
+                    <h3 class="text-danger">About our special one</h3>
+                    <p>A gentle <mark class="text-danger">@ViewBag.profile.color</mark> and docile cow with a heart as big as her appetite for fresh green grass. Her warm brown eyes and contented moo make her a beloved member of the farm community.</p>
+                    <div class="row about-list text-white">
+                        <div class="col-md-6">
+                            <div >
+                                <label class="text-danger">Breed</label>
+                                <p>@ViewBag.profile.type</p>
+                            </div>
+                            <div >
+                                <label class="text-danger">Diet Plan</label>
+                                <p>@ViewBag.profile.category</p>
+                            </div>
+                            </div>
+                        <div class="col-md-6 mb-4">
+                            <div>
+                                <label class="text-danger">Medical Condition:</label>
+                                <p>@ViewBag.plans[0].condition</p>
+                            </div>
+                            <div>
+                                <label class="text-danger">Price</label>
+                                
+                                <p>@ViewBag.profile.price</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="leaderboard-card leaderboard-card--first bg-secondary">
+                    <div class="leaderboard-card__top">
+                        <h3 class="text-center">@ViewBag.profile.avg_milk L</h3>
+                    </div>
+                    <div class="leaderboard-card__body">
+                        <div class="text-center">
+                            <img src="~/images/cow4.jpg" class="rounded-circle mb-2" alt="Cow Image">
+                            <h5 class="mb-0">Cow_id = @ViewBag.profile.id</h5>
+                            <p class="text-muted mb-0">@ViewBag.profile.type</p>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+
+
+        <div class="counter">
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="500" data-speed="500">@ViewBag.profile.avg_milk L</h6>
+                        <p class="m-0px font-w-600">Average Milk</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="150" data-speed="150">@ViewBag.profile.avg_temperature `C</h6>
+                        <p class="m-0px font-w-600">Average Temperature</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="850" data-speed="850">@ViewBag.weekly_milk.total L</h6>
+                        <p class="m-0px font-w-600">Weekly Production</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="190" data-speed="190">590 L</h6>
+                        <p class="m-0px font-w-600">Monthly Production</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+<div class="col-sm-12 col-xl-12 mt-2">
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Weekly Report</h6>
+
+        <div class="owl-carousel testimonial-carousel">
+            
+            <div class="testimonial-item text-center">
+                <div class="container-fluid pt-4 px-4">
+                    <div class="row g-4">
+                        <div class="col-sm-12 col-xl-6">
+                            <div class="bg-secondary text-center rounded p-4">
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <h6 class="mb-0">Milk Production</h6>
+                                    <a href="">last week</a>
+                                </div>
+                                <canvas id="milk" class="chart-canvas" height="170"></canvas>
+                            </div>
+
+                        </div>
+                            <div class="col-sm-12 col-xl-6">
+                                <div class="bg-secondary text-center rounded p-4">
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <h6 class="mb-0">Avg Temperature</h6>
+                                        <a href="">last week</a>
+                                    </div>
+                                    <canvas id="temp-chart" class="chart-canvas" height="170"></canvas>
+                                </div>
+                            </div>
+
+        </div>
+    </div>
+
+          
+</div>
+
+            <div class="testimonial-item text-center">
+                <div class="col-lg-13">
+                    <div class="card z-index-2 bg-secondary">
+                        <div class="card-header pb-0">
+                            <h4>Medical</h4>
+                            <p class="text-sm">
+                                <i class="fa fa-arrow-up text-success"></i>
+                                <span class="font-weight-bold">this week</span> till @DateTime.Now
+                            </p>
+                        </div>
+
+
+                        <!---------------Table condition---------->
+
+
+                        <div class="col-12">
+                            <div class="bg-secondary rounded h-100 p-4">
+                                <h6 class="mb-4">Condition:</h6>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align:center">Date</th>
+                                                <th style="text-align:center">Health Status</th>
+                                                <th style="text-align:center">Heart Rate</th>
+                                                <th style="text-align:center">Respiratory Rate</th>
+                                                <th style="text-align:center">Weight</th>
+                                                <th style="text-align:center">Disease</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.plans)
+                                            {
+                                                <tr>
+
+                                                    <td style="text-align:center"> @item.date.ToShortDateString()</td>
+
+                                                    @if(item.condition == "healthy")
+                                                    {
+                                                        <td style="text-align:center" class="text-success"> @item.condition</td>
+
+                                                    }
+                                                    else if(item.condition == "unhealthy"){
+                                                        <td style="text-align:center" class="text-warning"> @item.condition</td>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <td style="text-align:center" class="text-danger"> @item.condition</td>
+
+                                                    }
+                                                    <td style="text-align:center"> @item.heart_rate</td>
+                                                    <td style="text-align:center"> @item.respiratory_rate</td>
+                                                    <td style="text-align:center"> @item.weight</td>
+                                                    <td style="text-align:center"> @item.disease</td>
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                    <!--------Table end----------->
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    </div>
+            </div>
+
+</div>
+</div>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript">
+
+// Line Chart Milk production //
+
+    var dates = @Html.Raw(ViewBag.dates);
+    var milk = @Html.Raw(ViewBag.milk);
+    var temperature = @Html.Raw(ViewBag.temperature);
+
+  
+    var ctx = document.getElementById('milk').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Milk Production',
+                data: milk,
+                backgroundColor: 'white',
+                borderColor: 'orange',
+                borderWidth: 2,
+
+            }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+
+                y: {
+                    ticks: { color: 'white', beginAtZero: true }
+                },
+                x: {
+                    ticks: { color: 'white', beginAtZero: true }
+                }
+
+            }
+
+        }
+
+    }
+    )
+
+    // Bar Chart for temperature //
+
+    const bar = document.getElementById("temp-chart").getContext("2d");
+    var barChart = new Chart(bar, {
+        scaleFontColor: "white",
+        type: 'bar',
+        data: {
+            labels: dates,
+            datasets: [
+                {
+                    label: 'Temperature',
+                    data: temperature,
+                    backgroundColor: 'red'
+
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            categoryPercentage: 0.4,
+            scales: {
+
+                y: {
+                    ticks: { color: 'white', beginAtZero: true }
+                },
+                x: {
+                    ticks: { color: 'white', beginAtZero: true }
+                }
+
+            }
+
+        }
+    });
+
+
+</script>
+
+

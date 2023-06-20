@@ -221,8 +221,24 @@
       "PackagePath": "staticwebassets\\images\\cow3.jpg"
     },
     {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\cow4.jpg",
+      "PackagePath": "staticwebassets\\images\\cow4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\cow_icon.png",
+      "PackagePath": "staticwebassets\\images\\cow_icon.png"
+    },
+    {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\cow_logo.jpg",
       "PackagePath": "staticwebassets\\images\\cow_logo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\dairy.png",
+      "PackagePath": "staticwebassets\\images\\dairy.png"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\dairy_milk.jpg",
+      "PackagePath": "staticwebassets\\images\\dairy_milk.jpg"
     },
     {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\dashboard\\circle.png",
