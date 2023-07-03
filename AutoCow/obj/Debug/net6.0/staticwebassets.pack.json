@@ -677,6 +677,10 @@
       "PackagePath": "staticwebassets\\images\\logo.svg"
     },
     {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\milk_thismonth.jpg",
+      "PackagePath": "staticwebassets\\images\\milk_thismonth.jpg"
+    },
+    {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\product_images\\Homepod.png",
       "PackagePath": "staticwebassets\\images\\product_images\\Homepod.png"
     },

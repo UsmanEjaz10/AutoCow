@@ -73,7 +73,7 @@ namespace AutoCow.Repositories
                     }
                 }
 
-                string query = "Insert into cow_profile (id, color, type, price, avg_temp, avg_milk, category) values(@id, @color, @type, @price, @temp, @milk, @category)";
+                string query = "Insert into cow_profile (id, color, type, price, avg_temp, avg_milk, category, dob) values(@id, @color, @type, @price, @temp, @milk, @category, @dob)";
                 using (SqlCommand add = new SqlCommand(query, connection))
                 {
                     add.Parameters.AddWithValue("@id", cow_profile.id);
@@ -83,7 +83,7 @@ namespace AutoCow.Repositories
                     add.Parameters.AddWithValue("@temp", cow_profile.avg_temperature);
                     add.Parameters.AddWithValue("@milk", cow_profile.avg_milk);
                     add.Parameters.AddWithValue("@category", cow_profile.category);
-
+                    add.Parameters.AddWithValue("@dob", cow_profile.dob);
 
 
                     add.ExecuteNonQuery();
@@ -121,7 +121,7 @@ namespace AutoCow.Repositories
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "SELECT * FROM cow_profile where id= @cow_id";
+                string query = "SELECT id, type, price, color, avg_milk, avg_temp, category, dob, datediff(YY, dob, getdate()) as age FROM cow_profile where id= @cow_id";
 
 
                 Console.WriteLine(query);
@@ -139,7 +139,10 @@ namespace AutoCow.Repositories
                             cow_profile.avg_milk = (int)reader["avg_milk"];
                             cow_profile.avg_temperature = (int)reader["avg_temp"];
                             cow_profile.category = reader["category"].ToString();
+                            cow_profile.dob = (DateTime)reader["dob"];
+                            cow_profile.age = (int)reader["age"];
 
+                            
                             //    cow_profile.avg_milk = (int)reader["avg_milk"];
                             //    cow_profile.avg_temperature = (int)reader["avg_temp"];
                             //    cow_profile.category = reader["category"].ToString();

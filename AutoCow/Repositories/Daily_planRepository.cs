@@ -27,7 +27,7 @@ namespace AutoCow.Repositories
                 connection.Open();
                 DateTime endDate = DateTime.Now;
                 DateTime startDate = endDate.AddDays(-7);
-                string query = "SELECT date, type, SUM(milk) as total FROM daily_plan where date BETWEEN @startDate AND @endDate  GROUP BY date,type  ORDER BY date;";
+                string query = "SELECT date, type, SUM(milk) as total FROM daily_plan where date >= DATEADD(DAY, -7, GETDATE())  GROUP BY date,type  ORDER BY date;";
 
 
                 Console.WriteLine(query);
@@ -303,13 +303,13 @@ namespace AutoCow.Repositories
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        while(reader.Read())
+                        while (reader.Read())
                         {
                             Daily_plan data = new Daily_plan();
                             data.id = (int)reader["id"];
                             data.milk = (int)reader["total_milk"];
                             data.type = reader["type"].ToString();
-                            Console.WriteLine("cow id = " + data.id + " type = "+ data.type +"  and milk = " + data.milk);
+                            Console.WriteLine("cow id = " + data.id + " type = " + data.type + "  and milk = " + data.milk);
                             leaderboard.Add(data);
                         }
 
@@ -349,7 +349,7 @@ namespace AutoCow.Repositories
                             daily_plan.type = reader["type"].ToString();
                             daily_plan.insemination = reader["insemination"].ToString();
                             daily_plan.disease = reader["disease"].ToString();
-                            daily_plan.heart_rate = Convert.ToSingle( (decimal)( reader["heart_rate"]));
+                            daily_plan.heart_rate = Convert.ToSingle((decimal)(reader["heart_rate"]));
                             daily_plan.respiratory_rate = Convert.ToSingle((decimal)reader["respiratory_rate"]);
                             daily_plan.milk = (int)reader["milk"];
                             daily_plan.temperature = (int)reader["temperature"];
@@ -384,7 +384,7 @@ namespace AutoCow.Repositories
                             data.id = (int)reader["id"];
                             data.total = (int)reader["total_milk"];
                             Console.WriteLine("cow id = " + data.id + " type = " + data.type + "  and milk = " + data.milk);
-                            
+
                         }
 
                         reader.Close();
@@ -396,6 +396,98 @@ namespace AutoCow.Repositories
         }
 
 
+
+        public Boolean AddMonthlyProduction(Daily_plan dailyPlan)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                // Open the database connection
+                connection.Open();
+                DateTime dt = DateTime.Now;
+                var startDate = new DateTime(dt.Year, dt.Month, 1);
+                String month = startDate.ToString();
+                Console.WriteLine("Starting date of the month");
+                string checkquery = "SELECT * from monthly_production where Month = @date";
+                using (SqlCommand command = new SqlCommand(checkquery, connection))
+                {
+                    command.Parameters.AddWithValue("@date", month);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            reader.Close();
+                            string update_query = "UPDATE monthly_production SET Milk_production = milk_production +  @milk  WHERE Month = @date";
+                            using (SqlCommand update = new SqlCommand(update_query, connection))
+                            {
+                                update.Parameters.AddWithValue("@date", month);
+                                update.Parameters.AddWithValue("@milk", dailyPlan.milk);
+                                // Execute the SQL query
+                                int rowsAffected = update.ExecuteNonQuery();
+
+                                if (rowsAffected > 0)
+                                {
+                                    Console.WriteLine("Updation monthly_production successful");
+
+                                    return true;
+                                }
+                            }
+                        }
+                        reader.Close();
+                    }
+
+                    string first_entry = "INSERT INTO monthly_production (Month, Milk_production) VALUES(@date, @milk)";
+                    using (SqlCommand insert = new SqlCommand(first_entry, connection))
+                    {
+
+                        insert.Parameters.AddWithValue("@date", month);
+                        insert.Parameters.AddWithValue("@milk", dailyPlan.milk);
+
+                        insert.ExecuteNonQuery();
+                        Console.WriteLine("Insertion monthly_production Executed....");
+                        return true;
+                    }
+
+
+                }
+            }
+
+        }
+
+
+        public Daily_plan getTotalMilkMonthly(int id)
+        {
+            Daily_plan data = new Daily_plan();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT id, SUM(milk) AS total_milk FROM daily_plan WHERE date >= DATEADD(DAY, -30, GETDATE()) and id = @cow_id GROUP BY id;";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@cow_id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            data.id = (int)reader["id"];
+                            data.total = (int)reader["total_milk"];
+                            Console.WriteLine("cow id = " + data.id + " type = " + data.type + "  and milk = " + data.milk);
+
+                        }
+
+                        reader.Close();
+                    }
+                }
+
+                return data;
+            }
+
+
+
+
+        }
+
     }
-}
+  }
 

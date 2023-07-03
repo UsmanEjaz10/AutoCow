@@ -19,5 +19,9 @@
         public int total { get; set; }
 
         public int count_condition { get; set; }
+
+        public string symptom1 { get; set; }
+        public string symptom2 { get; set; }
+        public string symptom3 { get; set;}
     }
 }

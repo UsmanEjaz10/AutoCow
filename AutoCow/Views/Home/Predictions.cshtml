@@ -1,0 +1,154 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@section title{
+    <title>
+        Predictions | Admin
+    </title>
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/leaderboardStyle.css">
+</head>
+
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-8">
+            <div class="bg-secondary text-center rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Milk Production prediction</h6>
+                    <a href="">Over year</a>
+                </div>
+                <canvas id="monthly-prediction" class="chart-canvas" height="170"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-4">
+            <div class="bg-secondary text-center rounded p-4">
+                <div class="leaderboard-card leaderboard-card--first bg-secondary">
+                    <div class="leaderboard-card__top">
+                        <h3 class="text-center">This Month:</h3>
+                    </div>
+                    <div class="leaderboard-card__body">
+                        <div class="text-center">
+                            <img src="~/images/milk_thismonth.jpg" class="circle-img mb-2" alt="User Img">
+                            <h5 class="mb-0">Current: @ViewBag.thisMonth L</h5>
+                            <p class="text-muted mb-0">Predicted: @ViewBag.extra[0] L</p>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                @if(ViewBag.thisMonth > ViewBag.extra[0])
+                                {
+                                    float percent =  100 * ((ViewBag.thisMonth - ViewBag.extra[0]) / ViewBag.thisMonth);
+                                        
+                                    <span class="text-success font-weight-bolder"><i class="fas fa-angle-double-up"></i> @percent %</span>
+
+                                }
+                                else
+                                {
+                                    float percent = 100 * ((ViewBag.extra[0] - ViewBag.thisMonth) / ViewBag.extra[0]);
+
+                                    <span class="text-danger font-weight-bolder"><i class="fas fa-angle-double-down"></i> @percent %</span>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br />
+
+
+<script>
+
+    document.getElementById("Predictions").classList.add("active");
+    document.getElementById("Dashboard").classList.remove("active");
+
+
+
+    var months = @Html.Raw(ViewBag.months);
+    var prediction = @Html.Raw(ViewBag.prediction);
+    var upperbound = @Html.Raw(ViewBag.upperbound);
+    var lowerbound = @Html.Raw(ViewBag.lowerbound);
+
+
+
+    var ctx = document.getElementById('monthly-prediction').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Relative prediction',
+                data: prediction,
+                backgroundColor: 'white',
+                type: 'bar',
+                order: 4
+            },
+            {
+                label: 'Upper bound',
+                data: upperbound,
+                backgroundColor: 'white',
+                borderColor: 'green',
+                borderWidth: 2,
+                fill: false,
+                order: 2,
+                type: 'line'
+                
+            },
+            {
+                label: 'Lower Bound',
+                data: lowerbound,
+                backgroundColor: 'black',
+                borderColor: 'red',
+                borderWidth: 2,
+                fill: false,
+                order: 1,
+                type: 'line'
+
+            },
+            {
+                label: 'This month',
+                data: [@ViewBag.thisMonth],
+                backgroundColor: 'yellow',
+                type: 'bar',
+                order: 3
+            }
+            
+            ]
+        },
+        options: {
+            responsive: true,
+            categoryPercentage: 0.4,
+            scales: {
+
+                y: {
+                    beginatzero: true,
+                    
+                //    ticks: { color: 'white', beginatzero: true }
+                },
+                x: {
+                    beginatzero: true,
+                //    ticks: { color: 'white', beginatzero: true }
+                }
+                //yAxes: [{
+                //    display: true,
+                //    ticks: {
+                //        beginAtZero: true
+                //    }
+                //}]
+            }
+
+        }
+
+    }
+    );
+
+    
+
+
+</script>

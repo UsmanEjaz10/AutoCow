@@ -55,6 +55,11 @@
                     </div>
 
 
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.dob, "Date of birth:" , htmlAttributes: new {@class = "form-label"})
+                        @Html.TextBoxFor(m => m.dob, new { @class = "form-control" })
+                    </div>
+
                     <input type="submit" class="btn btn-primary">
                 
 
@@ -62,4 +67,8 @@
             </div>
         </div>
 
+        <script>
+            document.getElementById("Cows").classList.add("active");
+            document.getElementById("Dashboard").classList.remove("active");
 
+        </script>

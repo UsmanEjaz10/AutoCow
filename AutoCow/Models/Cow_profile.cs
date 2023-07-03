@@ -9,5 +9,9 @@
         public int avg_milk { get; set; }
         public int avg_temperature { get; set; }
         public String category { get; set; }
+
+        public DateTime dob { get; set; }
+
+        public int age { get; set; }
     }
 }

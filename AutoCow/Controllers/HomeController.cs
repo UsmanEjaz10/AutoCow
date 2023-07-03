@@ -14,13 +14,14 @@ namespace AutoCow.Controllers
         private readonly ProductionRepository _productionRepository;
         private readonly Daily_planRepository _daily_planRepository;
         private readonly MachineLearning _machineLearningRepository;
-
+        private readonly Monthly_ProductionRepository _monthly_productionRepository;
         public HomeController()
         {
             string connectionString = "Data Source=localhost;Initial Catalog=milk;Integrated Security=True;";
             _productionRepository = new ProductionRepository(connectionString);
             _daily_planRepository = new Daily_planRepository(connectionString);
             _machineLearningRepository = new MachineLearning(connectionString);
+            _monthly_productionRepository = new Monthly_ProductionRepository(connectionString);
         }
 
         [Route("")]
@@ -124,6 +125,58 @@ namespace AutoCow.Controllers
 
         [Route("d")]
         public ActionResult Index1() { return View(); }
+
+
+
+        [Route("predictions")]
+        public IActionResult Predictions()
+        {
+            DateTime d = DateTime.Now;
+            List<String> months = new List<String>();
+            
+            for(int i = 0; i< 12; i++)
+            {
+                DateTime e = d.AddMonths(i);
+
+                months.Add(e.ToString("MMM"));
+
+                Console.WriteLine(months[i]);
+            }
+
+            // Load model and predict the next set values.
+            // The number of values predicted is equal to the horizon specified while training.
+            var result = MLModel1.Predict(null, 12);
+
+            
+            var upperbound = JsonConvert.SerializeObject( result.Milk_Production_UB);
+            var lowerbound = JsonConvert.SerializeObject(result.Milk_Production_LB);
+            var prediction = JsonConvert.SerializeObject(result.Milk_Production);
+            var month_dates = JsonConvert.SerializeObject(months);
+
+
+            ViewBag.months = month_dates;
+            ViewBag.lowerbound = lowerbound;
+            ViewBag.prediction = prediction;
+            ViewBag.upperbound = upperbound;
+            ViewBag.extra = result.Milk_Production;
+
+            foreach(var i in prediction)
+            {
+                Console.WriteLine(i);
+            }
+
+
+            float milk = _monthly_productionRepository.GetThisMonthData();
+            ViewBag.thisMonth = milk;
+
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+
+        }
     }
 
 

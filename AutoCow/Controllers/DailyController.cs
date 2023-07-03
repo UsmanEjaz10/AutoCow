@@ -10,10 +10,12 @@ namespace AutoCow.Controllers
     public class DailyController : Controller
     {
         private readonly Daily_planRepository _daily_planRepository;
+        private readonly Cow_ProfileRepository _cowProfileRepository;
 
         public DailyController() {
             string connectionString = "Data Source=localhost;Initial Catalog=milk;Integrated Security=True;";
             _daily_planRepository = new Daily_planRepository(connectionString);
+            _cowProfileRepository = new Cow_ProfileRepository(connectionString);
 
         }
 
@@ -24,6 +26,9 @@ namespace AutoCow.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            List<Cow_profile> cow = _cowProfileRepository.GetAllCows();
+            var ids = cow.Select(d => d.id).ToArray();
+
             return View(new Daily_plan());
         }
 
@@ -48,15 +53,43 @@ namespace AutoCow.Controllers
             Console.WriteLine(result.PredictedLabel);
             model.condition = result.PredictedLabel;
             model.type = type;
-            Cow_profile cow_Profile;
+            Cow_profile cow_Profile = _cowProfileRepository.GetCowById(model.id);
 
+
+            Console.WriteLine("---");
+            Console.WriteLine(model.symptom1);
+            Console.WriteLine("---");
+
+
+            if (model.symptom1 != null) { 
+            //Load sample data to predict disease
+            var sampleData1 = new MLModel2.ModelInput()
+            {
+                Animal = @"cow",
+                Age = cow_Profile.age,
+                Temperature = model.temperature,
+                Symptom_1 = model.symptom1,
+                Symptom_2 = model.symptom2,
+                Symptom_3 = model.symptom3,
+            };
+
+            //Load model and predict output
+            var disease = MLModel2.Predict(sampleData1);
+            model.disease = disease.PredictedLabel;
+
+            }
+            else
+            {
+                model.disease = "N";
+            }
             Console.WriteLine("Info recieved at controller now sending it to Repository");
 
             if(_daily_planRepository.Add(model) && _daily_planRepository.AddProduction(model))
             {
-              cow_Profile =   _daily_planRepository.UpdateCow_ProfileData(model);
+               _daily_planRepository.UpdateCow_ProfileData(model);
             }
 
+            _daily_planRepository.AddMonthlyProduction(model);
             
             
 

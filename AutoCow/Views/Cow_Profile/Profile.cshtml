@@ -28,6 +28,11 @@
                                 <label class="text-danger">Diet Plan</label>
                                 <p>@ViewBag.profile.category</p>
                             </div>
+                            <div>
+                                <label class="text-danger">Age</label>
+
+                                <p>@ViewBag.profile.age</p>
+                            </div>
                             </div>
                         <div class="col-md-6 mb-4">
                             <div>
@@ -39,7 +44,11 @@
                                 
                                 <p>@ViewBag.profile.price</p>
                             </div>
-                            
+                            <div>
+                                <label class="text-danger">Date of Birth</label>
+
+                                <p>@ViewBag.profile.dob.ToShortDateString()</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,7 +95,7 @@
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="count-data text-center">
-                        <h6 class="count h2" data-to="190" data-speed="190">590 L</h6>
+                        <h6 class="count h2" data-to="190" data-speed="190">@ViewBag.monthly_milk.total L</h6>
                         <p class="m-0px font-w-600">Monthly Production</p>
                     </div>
                 </div>
@@ -226,7 +235,10 @@
     var milk = @Html.Raw(ViewBag.milk);
     var temperature = @Html.Raw(ViewBag.temperature);
 
-  
+    dates.reverse();
+    milk.reverse();
+    temperature.reverse();
+
     var ctx = document.getElementById('milk').getContext('2d');
     var chart = new Chart(ctx, {
         type: 'line',
@@ -279,7 +291,7 @@
         },
         options: {
             responsive: true,
-            categoryPercentage: 0.4,
+            categoryPercentage: 0.2,
             scales: {
 
                 y: {
@@ -294,7 +306,10 @@
         }
     });
 
+        document.getElementById("Cows").classList.add("active");
+        document.getElementById("Dashboard").classList.remove("active");
 
-</script>
+
+    </script>
 
 

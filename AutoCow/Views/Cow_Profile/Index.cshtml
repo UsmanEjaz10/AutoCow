@@ -68,6 +68,7 @@
 
                 <div class="d-flex justify-content-between">
                          <input type="submit" value="Update" class="btn btn-primary">
+                        <button class="btn btn-dark btn-sm"><a asp-controller="Cow_Profile" asp-action="Profile" asp-route-id="@item.id">Profile</a></button>
 
                         <button class="btn btn-primary btn-sm "><a asp-controller="Cow_Profile" asp-action="deleteCow" asp-route-id="@item.id" class="text-white">Delete</a></button>
 
@@ -108,4 +109,7 @@
             }
         });
     });
+
+    document.getElementById("Cows").classList.add("active");
+    document.getElementById("Dashboard").classList.remove("active");
     </script>

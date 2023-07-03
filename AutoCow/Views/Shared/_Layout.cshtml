@@ -109,14 +109,15 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a class="nav-item nav-link active" asp-controller="Home" asp-action="Index"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <a class="nav-item nav-link active" asp-controller="Home" asp-action="Index" id="Dashboard"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
 
-                    <a class="nav-item nav-link" asp-controller="Daily" asp-action="Index"><i class="fa fa-user-edit me-2"></i>Daily Entry</a>
-                    <a class="nav-item nav-link" asp-controller="Cow_Profile" asp-action="Index"><i class="fas fa-hippo me-2"></i>Cows</a>
-                    <a class="nav-item nav-link" asp-controller="Home" asp-action="dashboard"><i class="fa fa-chart-bar me-2"></i>Leaderboard</a>
-                        <a class="nav-item nav-link" asp-controller="Home" asp-action="Privacy"><i class="fa fa-sticky-note me-2"></i>Privacy</a>
-                        
-                    </div>
+                    <a class="nav-item nav-link" asp-controller="Daily" asp-action="Index" id="DailyEntry"><i class="fa fa-user-edit me-2"></i>Daily Entry</a>
+                    <a class="nav-item nav-link" asp-controller="Cow_Profile" asp-action="Index" id="Cows"><i class="fas fa-hippo me-2"></i>Cows</a>
+                    <a class="nav-item nav-link" asp-controller="Home" asp-action="dashboard" id="Leaderboard"><i class="fa fa-chart-bar me-2"></i>Leaderboard</a>
+                        <a class="nav-item nav-link" asp-controller="Home" asp-action="Privacy" id="Privacy"><i class="fa fa-sticky-note me-2"></i>Privacy</a>
+                   <a class="nav-item nav-link" asp-controller="Home" asp-action="Predictions" id="Predictions"><i class="fa fa-chart-area me-2"></i>Predictions</a>
+
+                </div>
                 </nav>
             </div>
 
@@ -159,12 +160,14 @@
       
         </div>
    </div>
-
+   <br />
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
+    <br />
+    <br />
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="container" style="text-align:end">
             &copy; 2023 - AutoCow - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "k8V0SUhzFhH7pilqNeTf3SEZARPhtouN6OeMh1CAJQA=",
+  "Hash": "YZ3AgGFyL59ZM/cizFjZ0+KPG0Icd8Gyba9uXYWHGP4=",
   "Source": "AutoCow",
   "BasePath": "_content/AutoCow",
   "Mode": "Default",
@@ -2905,6 +2905,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\logo-mini.svg"
+    },
+    {
+      "Identity": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\milk_thismonth.jpg",
+      "SourceId": "AutoCow",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\",
+      "BasePath": "_content/AutoCow",
+      "RelativePath": "images/milk_thismonth.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\milk_thismonth.jpg"
     },
     {
       "Identity": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\product_images\\apple-watch.jpg",
