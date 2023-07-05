@@ -4,7 +4,8 @@
     {
         public int id { get; set; }
         public DateTime date { get; set; }
-        public int milk { get; set; }  
+        public int milk { get; set; }
+          
         public int temperature { get; set; }
         public string insemination { get; set; }
         public string disease { get; set; }

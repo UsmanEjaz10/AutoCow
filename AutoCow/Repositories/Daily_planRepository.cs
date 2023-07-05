@@ -271,6 +271,7 @@ namespace AutoCow.Repositories
             }
 
         }
+        
 
         public void deleteCowDailyData(int id)
         {
@@ -320,6 +321,41 @@ namespace AutoCow.Repositories
                 return leaderboard;
             }
         }
+
+
+        public List<Daily_plan> getMonthlyLeaderboard()
+        {
+            List<Daily_plan> leaderboard = new List<Daily_plan>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT id, type, SUM(milk) AS total_milk FROM daily_plan WHERE date >= DATEADD(DAY, -30, GETDATE()) GROUP BY id, type Order by total_milk DESC";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Daily_plan data = new Daily_plan();
+                            data.id = (int)reader["id"];
+                            data.milk = (int)reader["total_milk"];
+                            data.type = reader["type"].ToString();
+                            Console.WriteLine("cow id = " + data.id + " type = " + data.type + "  and milk = " + data.milk);
+                            leaderboard.Add(data);
+                        }
+
+                        reader.Close();
+                    }
+                }
+
+                return leaderboard;
+            }
+        }
+
+
+
 
 
         public List<Daily_plan> GetDailyDataById(int cow_id)
@@ -487,6 +523,7 @@ namespace AutoCow.Repositories
 
 
         }
+
 
     }
   }
