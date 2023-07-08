@@ -14,17 +14,17 @@
 
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
-        <div class="col-sm-12 col-xl-8">
+        <div class="col-sm-12 col-xl-6">
             <div class="bg-secondary text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h6 class="mb-0">Milk Production prediction</h6>
-                    <a href="">Over year</a>
+                    <a href="" class="text-light">Over year</a>
                 </div>
                 <canvas id="monthly-prediction" class="chart-canvas" height="170"></canvas>
             </div>
         </div>
-        <div class="col-sm-12 col-xl-4">
-            <div class="bg-secondary text-center rounded p-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-dark text-center rounded p-4">
                 <div class="leaderboard-card leaderboard-card--first bg-secondary">
                     <div class="leaderboard-card__top">
                         <h3 class="text-center">This Month:</h3>
@@ -35,7 +35,7 @@
                             <h5 class="mb-0">Current: @ViewBag.thisMonth L</h5>
                             <p class="text-muted mb-0">Predicted: @ViewBag.extra[0] L</p>
                             <hr>
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center text-center">
                                 @if(ViewBag.thisMonth > ViewBag.extra[0])
                                 {
                                     float percent =  100 * ((ViewBag.thisMonth - ViewBag.extra[0]) / ViewBag.thisMonth);
@@ -57,6 +57,20 @@
             </div>
         </div>
     </div>
+    <br />
+    <br />
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Monthly Milk Production</h6>
+                <a href="" class="text-light">last month</a>
+            </div>
+            <canvas id="monthlydisplay" class="chart-canvas" height="170"></canvas>
+        </div>
+        </div>
+    </div>
+
 </div>
 
 <br>
@@ -103,7 +117,7 @@
             {
                 label: 'Lower Bound',
                 data: lowerbound,
-                backgroundColor: 'black',
+                backgroundColor: 'white',
                 borderColor: 'red',
                 borderWidth: 2,
                 fill: false,
@@ -148,7 +162,40 @@
     }
     );
 
-    
 
+    var last_month = @Html.Raw(ViewBag.weekly);
+
+    var ctx2 = document.getElementById('monthlydisplay').getContext('2d');
+    var chart2 = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+            datasets: [{
+                label: 'Last Month Production',
+                data: last_month,
+                backgroundColor: 'white',
+                borderColor: 'orange',
+                borderWidth: 2,
+
+            }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+
+                y: {
+                    ticks: { color: 'white', beginAtZero: true }
+                },
+                x: {
+                    ticks: { color: 'white', beginAtZero: true }
+                }
+
+            }
+
+        }
+
+    }
+    )
 
 </script>

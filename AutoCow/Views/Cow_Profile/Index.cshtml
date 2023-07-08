@@ -62,15 +62,15 @@
                     <h5 class="card-title"><i class="fas fa-hippo me-2"></i>Cow: @item.id</h5>
                 <p class="card-text">Type:  @item.type</p>
                     <p class="card-text"><i class="fas fa-money me-2"></i>Price: @item.price</p>
-                    <p class="card-text"><i class="fas fa-glass-whiskey me-2"></i>Avg-Milk: @item.avg_milk L </p>
-                <p class="card-text">Avg-Temperature: @item.avg_temperature</p>
+                    <p class="card-text"><i class="fas fa-glass-whiskey me-2"></i>Avg Milk: @item.avg_milk L </p>
+                <p class="card-text">Avg Temperature: @item.avg_temperature</p>
                 <p class="card-text">Category: @item.category</p>
 
                 <div class="d-flex justify-content-between">
-                         <input type="submit" value="Update" class="btn btn-primary">
+                        <button class="btn btn-dark btn-sm "><a asp-controller="Cow_Profile" asp-action="UpdateCow" asp-route-id="@item.id" class="text-white">Update</a></button>
                         <button class="btn btn-dark btn-sm"><a asp-controller="Cow_Profile" asp-action="Profile" asp-route-id="@item.id">Profile</a></button>
 
-                        <button class="btn btn-primary btn-sm "><a asp-controller="Cow_Profile" asp-action="deleteCow" asp-route-id="@item.id" class="text-white">Delete</a></button>
+                        <button class="btn btn-dark btn-sm "><a asp-controller="Cow_Profile" asp-action="deleteCow" asp-route-id="@item.id" class="text-white">Delete</a></button>
 
                     </div>
                 </div>
@@ -84,14 +84,18 @@
 <script>
     $(document).ready(function () {
         $("#convertButton").click(function () {
-            var tableHtml = "<table class='table'><thead><tr><th>ID</th><th>Type</th><th>Price</th></tr></thead><tbody>";
+            var tableHtml = "<table class='table'><thead><tr><th>ID</th><th>Type</th><th>Price</th><th>Avg Milk</th><th>Avg Temperature</th><th>Category</th></tr></thead><tbody>";
 
             $("#cardContainer .card").each(function () {
                 var id = $(this).find(".card-title:eq(0)").text().replace("ID: ", "");
                 var type = $(this).find(".card-text:eq(0)").text().replace("Type: ", "");
                 var price = $(this).find(".card-text:eq(1)").text().replace("Price: $", "");
+ 
+                var avg_milk = $(this).find(".card-text:eq(2)").text().replace("Avg Milk : $", "");
+                var avg_temperature = $(this).find(".card-text:eq(3)").text().replace("Avg Temperature: $", "");
+                var category = $(this).find(".card-text:eq(4)").text().replace("Category: $", "");
 
-                tableHtml += "<tr><td>" + id + "</td><td>" + type + "</td><td>" + price + "</td></tr>";
+                tableHtml += "<tr><td>" + id + "</td><td>" + type + "</td><td>" + price + "</td><td>" + avg_milk + "</td><td>" + avg_temperature + "</td><td>" + category + "</td></tr>";
             });
 
             tableHtml += "</tbody></table>";

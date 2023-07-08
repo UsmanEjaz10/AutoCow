@@ -1,4 +1,6 @@
-﻿using AutoCow.Models;
+﻿// DESKTOP-IPO0A9V\SQLEXPRESS //
+
+using AutoCow.Models;
 using AutoCow.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -15,17 +17,20 @@ namespace AutoCow.Controllers
         private readonly Daily_planRepository _daily_planRepository;
         private readonly MachineLearning _machineLearningRepository;
         private readonly Monthly_ProductionRepository _monthly_productionRepository;
-        public HomeController()
+
+		private readonly Cow_ProfileRepository _cow_ProfileRepository;
+		public HomeController()
         {
             string connectionString = "Data Source=localhost;Initial Catalog=milk;Integrated Security=True;";
             _productionRepository = new ProductionRepository(connectionString);
             _daily_planRepository = new Daily_planRepository(connectionString);
             _machineLearningRepository = new MachineLearning(connectionString);
-            _monthly_productionRepository = new Monthly_ProductionRepository(connectionString);
+            _cow_ProfileRepository = new Cow_ProfileRepository(connectionString);
+			_monthly_productionRepository = new Monthly_ProductionRepository(connectionString);
         }
 
         [Route("")]
-        public ActionResult Index()
+        public IActionResult Index()
         {
 
             //------------------------------------------------------------------------------------//
@@ -67,18 +72,23 @@ namespace AutoCow.Controllers
             //-----------------------------------------------------------------------------------------//
 
             List<Daily_plan> leaderboardlist = _daily_planRepository.getLeaderboard();
-            //var leaderboard_dates = leaderboardlist.Select(d => d.id).ToArray();
-            //var leaderboard_milk = leaderboardlist.Select(d => d.milk).ToArray();
-            //var leaderboard_type = leaderboardlist.Select(d => d.type).ToArray();
-
             ViewBag.leaderboard = leaderboardlist;
 
+            //-----------------------------------------------------------------------------------------//
 
-            return View();
+            int NB = _cow_ProfileRepository.getCount("Normal Breed");
+			int CB = _cow_ProfileRepository.getCount("Cross Breed");
+
+            ViewBag.NB = NB;
+            ViewBag.CB = CB;
+			//-----------------------------------------------------------------------------------------//
+
+
+			return View();
         }
 
         [Route("privacy")]
-        public ActionResult Privacy() {
+        public IActionResult Privacy() {
 
             var context = new MLContext();
             var productionData = _productionRepository.GetAllTimeProductionData();
@@ -111,7 +121,7 @@ namespace AutoCow.Controllers
 
 
         [Route("dashboard")]
-        public ActionResult Dashboard() {
+        public IActionResult Dashboard() {
 
 			List<Daily_plan> leaderboardlist = _daily_planRepository.getLeaderboard();
 			var leaderboard_dates = leaderboardlist.Select(d => d.id).ToArray();
@@ -160,14 +170,22 @@ namespace AutoCow.Controllers
             ViewBag.upperbound = upperbound;
             ViewBag.extra = result.Milk_Production;
 
-            foreach(var i in prediction)
-            {
-                Console.WriteLine(i);
-            }
-
 
             float milk = _monthly_productionRepository.GetThisMonthData();
             ViewBag.thisMonth = milk;
+
+
+            List<int> WeekWise = _productionRepository.GetWeekWiseData();
+            
+            for (int i = 0; i < 4; i++)
+            {
+                Console.WriteLine("Week" + i + " = " + WeekWise[i]);
+            }
+
+
+            var Weekly = JsonConvert.SerializeObject(WeekWise);
+            ViewBag.weekly = Weekly;
+
 
             return View();
         }

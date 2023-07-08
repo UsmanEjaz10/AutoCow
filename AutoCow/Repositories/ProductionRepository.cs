@@ -21,7 +21,7 @@ namespace AutoCow.Repositories
                 connection.Open();
                 DateTime endDate = DateTime.Now;
                 DateTime startDate = endDate.AddDays(-7);
-                string query = "SELECT date, milk_production FROM Production where date BETWEEN @startDate AND @endDate";
+                string query = "SELECT date, milk_production FROM Production where date BETWEEN @startDate AND @endDate order by date";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -102,6 +102,32 @@ namespace AutoCow.Repositories
 			return productionDataList;
 		}
 
-	}
+
+        public List<int> GetWeekWiseData()
+        {
+            List<int> milk = new List<int>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "";
+                
+                     query = "SELECT DATEADD(WEEK, DATEDIFF(WEEK, 0, date), 0) AS week_start_date, SUM(milk_production) AS milk_sum FROM production WHERE date>= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) - 1, 0)  AND date < DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0)  GROUP BY DATEADD(WEEK, DATEDIFF(WEEK, 0, date), 0) ORDER BY week_start_date;";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                           int  milk_sum = (int)reader["milk_sum"];
+                            milk.Add(milk_sum);
+                        }
+                    }
+                }
+            }
+
+            return milk;
+        }
+    }
 
 }

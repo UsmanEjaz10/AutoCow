@@ -156,7 +156,30 @@ namespace AutoCow.Repositories
             return cow_profile;
         }
 
+        public int getCount(string ty) {
 
+            int count = 0;
+			using (SqlConnection connection = new SqlConnection(_connectionString))
+			{
+				connection.Open();
+				String checkquery = "Select  COUNT(type) as NB from cow_profile where type = @t ";
+				using (SqlCommand command = new SqlCommand(checkquery, connection))
+				{
+                    command.Parameters.AddWithValue("@t", ty);
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+                            count += (int)reader["NB"];
+						}
+					}
+				}
+
+			}
+
+            return count;
+
+        }
         
     }
 }

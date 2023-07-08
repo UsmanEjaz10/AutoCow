@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YZ3AgGFyL59ZM/cizFjZ0+KPG0Icd8Gyba9uXYWHGP4=",
+  "Hash": "GYYPmJF0Rc6eOp+Ocre0a2plcHNDQxZMBggcpTX55f0=",
   "Source": "AutoCow",
   "BasePath": "_content/AutoCow",
   "Mode": "Default",
@@ -440,6 +440,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\4.jpg",
+      "SourceId": "AutoCow",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\",
+      "BasePath": "_content/AutoCow",
+      "RelativePath": "images/4.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\4.jpg"
     },
     {
       "Identity": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\admin_profile.jpg",

@@ -154,7 +154,37 @@
     </div>
 
     <br>
+    
+
+
+    <!-- Cow Chart Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Current Report</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <canvas id="polar" class="chart-canvas" height="170"></canvas>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Cattle count: @ViewBag.NB + @ViewBag.CB</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <canvas id="cowType" class="chart-canvas" height="170"></canvas>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
     <br />
+
     <!-----------------------------Top 3---------------------------------------->
 
     <div class="col-lg-13">
@@ -342,9 +372,39 @@
     });
 
     //---------------------------------------------------------------//
+                    var NBCB = @ViewBag.NB + @ViewBag.CB;
+                    const myChart = new Chart(document.getElementById("cowType"), {
+                        type: "doughnut",
+                        data: {
+                            labels: ["Normal Breed", "Cross Breed"],
+                            datasets: [
+                                {
+                                    data: [@ViewBag.NB, @ViewBag.CB ],
+                                    backgroundColor: ["white", "red"],
+                                    cutout: "80%",
+                                },
+                            ],
+                        },
+                        options: {
+                            height: 200,
+                            title: {
+                                text: "Cattle Data",
+                            },
+                            labels: {
+                                fontSize: 12,
+                            },
+                            animation: {
+                                duration: 3000,
+                                easing: "ease-in",
+                                rotate: true,
+                            },
+                        },
+         });
 
-    
-    //-------------------------------------------------------------------------------//
+
+                    //-------------------------------------------------------------------------------//
+
+
 
 
     var Sahiwal_count = 0;
@@ -406,7 +466,35 @@
     }
 
 
-    
+                    //-------------------------------------------------------------------------------//
+
+                    const myChart1 = new Chart(document.getElementById("polar"), {
+                        type: "polarArea",
+                        data: {
+                            labels: ["Cattle", "Average daily", "Milk(week) in 10s L", "Today's tally", "Revenue in K"],
+                            datasets: [
+                                {
+                                    data: [NBCB, averageProduction, total_milk / 10, today_milk, milk_cost],
+                                    backgroundColor: ["orange", "red", "white", "black", "grey"],
+                                },
+                            ],
+                        },
+                        options: {
+                            title: {
+                                text: "My Polar Chart",
+                            },
+                            animation: {
+                                duration: 2000,
+                                easing: "ease-in",
+                                scale: true,
+                            },
+                        },
+                    });
+
+                 //-------------------------------------------------------------------------------//
+
+
+
     
     
 </script>

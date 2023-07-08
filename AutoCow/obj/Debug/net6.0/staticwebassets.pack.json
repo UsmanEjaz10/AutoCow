@@ -97,6 +97,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\4.jpg",
+      "PackagePath": "staticwebassets\\images\\4.jpg"
+    },
+    {
       "Id": "C:\\Users\\Lenovo\\source\\repos\\AutoCow\\AutoCow\\wwwroot\\images\\admin_profile.jpg",
       "PackagePath": "staticwebassets\\images\\admin_profile.jpg"
     },
