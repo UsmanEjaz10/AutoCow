@@ -246,15 +246,17 @@ namespace AutoCow.Repositories
                         {
                             cow_Profile.avg_milk = (int)reader["average_milk"];
                             cow_Profile.avg_temperature = (int)reader["average_temp"];
+                            
 
                             reader.Close();
-                            string insertQuery = "Update cow_profile set avg_milk = @avg_milk, avg_temp = @avg_temp where id = @cow_id";
+                            string insertQuery = "Update cow_profile set avg_milk = @avg_milk, avg_temp = @avg_temp, category = @category where id = @cow_id";
                             using (SqlCommand insert = new SqlCommand(insertQuery, connection))
                             {
 
                                 insert.Parameters.AddWithValue("@cow_id", cow_Profile.id);
                                 insert.Parameters.AddWithValue("@avg_milk", cow_Profile.avg_milk);
                                 insert.Parameters.AddWithValue("@avg_temp", cow_Profile.avg_temperature);
+                                insert.Parameters.AddWithValue("@category", cow_Profile.category);
 
                                 insert.ExecuteNonQuery();
                                 Console.WriteLine("Insertion Executed...Avg.");

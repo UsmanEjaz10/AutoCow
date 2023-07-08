@@ -56,11 +56,6 @@ namespace AutoCow.Controllers
             Cow_profile cow_Profile = _cowProfileRepository.GetCowById(model.id);
 
 
-            Console.WriteLine("---");
-            Console.WriteLine(model.symptom1);
-            Console.WriteLine("---");
-
-
             if (model.symptom1 != null) { 
             //Load sample data to predict disease
             var sampleData1 = new MLModel2.ModelInput()
