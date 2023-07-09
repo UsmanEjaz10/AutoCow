@@ -12843,9 +12843,11 @@ dl {
       padding: .5rem 2.5rem;
       background: #fcfcfd;
       color: #000; }
-      .nav-pills.nav-pills-custom .nav-link.active {
-        background: #fc5a5a;
-        color: #ffffff; }
+        .nav-pills.nav-pills-custom .nav-link.active {
+            background: #ffffff;
+            /*#fc5a5a*/
+            color: #ffffff;
+        }
 
 .tab-content {
   border: 1px solid rgba(151, 151, 151, 0.3);

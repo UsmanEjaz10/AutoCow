@@ -27,6 +27,7 @@ namespace AutoCow.Repositories
                     {
                         if (reader.Read())
                         {
+                            dp.category = category;
                             dp.eatable1 = reader["eatable1"].ToString();
                             dp.eatable2 = reader["eatable2"].ToString();
                             dp.eatable3 = reader["eatable3"].ToString();
