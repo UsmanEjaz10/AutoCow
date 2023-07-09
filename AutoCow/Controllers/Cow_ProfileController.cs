@@ -10,13 +10,14 @@ namespace AutoCow.Controllers
     {
         private readonly Cow_ProfileRepository _cow_profileRepository;
         private readonly Daily_planRepository _daily_planRepository;
+        private readonly Diet_planRepository _diet_planRepository;
 
         public Cow_ProfileController()
         {
             string connectionString = "Data Source=localhost;Initial Catalog=milk;Integrated Security=True;";
             _cow_profileRepository = new Cow_ProfileRepository(connectionString);
             _daily_planRepository = new Daily_planRepository(connectionString);
-
+            _diet_planRepository = new Diet_planRepository(connectionString);
         }
 
 
@@ -77,6 +78,9 @@ namespace AutoCow.Controllers
             ViewBag.dates = JsonConvert.SerializeObject(dates);
             ViewBag.milk = JsonConvert.SerializeObject(milk);
             ViewBag.temperature = JsonConvert.SerializeObject(temperature);
+
+            Diet_plan dp = _diet_planRepository.getAllEatables(cow_Profile.category);
+            ViewBag.nutrition = dp;
 
             return View();
         }

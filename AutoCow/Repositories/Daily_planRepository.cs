@@ -227,10 +227,11 @@ namespace AutoCow.Repositories
             return type;
         }
 
-        public Cow_profile UpdateCow_ProfileData(Daily_plan profile)
+        public Cow_profile UpdateCow_ProfileData(Cow_profile profile)
         {
             Cow_profile cow_Profile = new Cow_profile();
             cow_Profile.id = profile.id;
+            cow_Profile.category = profile.category;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -524,6 +525,35 @@ namespace AutoCow.Repositories
 
 
 
+        }
+
+
+        public String dietPlanPredictor(Daily_plan model)
+        {
+            String category = "";
+
+            if(model.condition == "healthy" && model.insemination == "Y")
+            {
+                category = "D1";
+            }
+            else if(model.condition == "healthy" && model.insemination != "Y")
+            {
+                category = "D2";
+            }
+            else if(model.condition == "unhealthy" && model.insemination == "Y")
+            {
+                category = "D3";
+            }
+            else if(model.condition == "unhealthy" && model.insemination != "Y")
+            {
+                category = "D4";
+            }
+            else if (model.condition == "critical")
+            {
+                category = "Med";
+            }
+
+            return category;
         }
 
 

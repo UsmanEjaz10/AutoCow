@@ -49,7 +49,7 @@
                 <div class="card-header p-3 pt-2">
                     
                     <div class=" pt-1 ">
-                        <i class="fa fa-money fa-3x text-success"></i>
+                        <i class="fa fa-money fa-2x text-success"></i>
                         <br>
                         <p class="text-sm mb-0 text-capitalize">Revenue</p>
                         <h4 class="mb-0 text-end" id="milk_cost"></h4>
@@ -68,7 +68,7 @@
                 <div class="card-header p-3 pt-2">
                     
                     <div class="pt-1">
-                        <i class="fas fa-burn fa-3x text-primary"></i>
+                        <i class="fas fa-burn fa-2x text-primary"></i>
                         <br>
                         <p class="text-sm mb-0 text-capitalize ">Milk Production</p>
                         <h4 class="mb-0 text-end" id="TotalMilk"></h4>
@@ -89,7 +89,7 @@
             <div class="card bg-secondary">
                 <div class="card-header p-3 pt-2">
                     <div class=" pt-1">
-                        <i class="fa fa-medkit fa-3x text-primary"></i>
+                        <i class="fa fa-medkit fa-2x text-primary"></i>
                         <br>
                         <p class="text-sm mb-0 text-capitalize">Emergency Cases</p>
                         <h4 class="mb-0 text-end" id="alerts">0</h4>
@@ -110,7 +110,7 @@
                 <div class="card-header p-3 pt-2">
                     
                     <div class=" pt-1">
-                        <i class="fa fa-calendar fa-3x text-success"></i>
+                        <i class="fa fa-calendar fa-2x text-success"></i>
                         <br>
                         <p class="text-sm mb-0 text-capitalize">Today's</p>
                         <h4 class="mb-0 text-end" id="today">0</h4>
@@ -372,6 +372,8 @@
     });
 
     //---------------------------------------------------------------//
+            //------doughnut area chart ----------//
+
                     var NBCB = @ViewBag.NB + @ViewBag.CB;
                     const myChart = new Chart(document.getElementById("cowType"), {
                         type: "doughnut",
@@ -466,7 +468,7 @@
     }
 
 
-                    //-------------------------------------------------------------------------------//
+                    //----------------------------polar area chart---------------------------------------------------//
 
                     const myChart1 = new Chart(document.getElementById("polar"), {
                         type: "polarArea",

@@ -6,6 +6,54 @@
     "Version": 1,
     "ColumnProperties": [
       {
+        "ColumnName": "Livestock_Animal",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "Age",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "Feed_Type",
+        "ColumnPurpose": "Label",
+        "ColumnDataFormat": "String",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "Food_Size_KG",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "Feed_Frequency",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "weight",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
         "ColumnName": "condition",
         "ColumnPurpose": "Feature",
         "ColumnDataFormat": "String",
@@ -15,23 +63,23 @@
       },
       {
         "ColumnName": "insemination",
-        "ColumnPurpose": "Feature",
+        "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "String",
-        "IsCategorical": true,
+        "IsCategorical": false,
         "Type": "Column",
         "Version": 2
       },
       {
-        "ColumnName": "disease",
-        "ColumnPurpose": "Feature",
+        "ColumnName": "type ",
+        "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "String",
-        "IsCategorical": true,
+        "IsCategorical": false,
         "Type": "Column",
         "Version": 2
       },
       {
-        "ColumnName": "category",
-        "ColumnPurpose": "Label",
+        "ColumnName": "breed_type",
+        "ColumnPurpose": "Feature",
         "ColumnDataFormat": "String",
         "IsCategorical": true,
         "Type": "Column",
@@ -39,10 +87,10 @@
       }
     ],
     "ConnectionString": "Data Source=DESKTOP-IPO0A9V\\SQLEXPRESS;Initial Catalog=milk;Integrated Security=True",
-    "CommandString": "SELECT condition, insemination, disease, category FROM [dbo].[D_ML]",
+    "CommandString": "SELECT Livestock_Animal, CAST(Age as REAL), Feed_Type, CAST(Food_Size_KG as REAL), CAST(Feed_Frequency as REAL), CAST(weight as REAL), condition, insemination, type , breed_type FROM [dbo].[diet]",
     "DatabaseName": "milk",
     "SelectedTableDbo": "dbo",
-    "TableName": "D_ML"
+    "TableName": "diet"
   },
   "Environment": {
     "Type": "LocalCPU",
@@ -56,99 +104,78 @@
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "SdcaMaximumEntropyMulti",
-        "Score": 0.25,
-        "RuntimeInSeconds": 2.5980000495910645
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionOva",
-        "Score": 0.25,
-        "RuntimeInSeconds": 13.717000007629395
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeOva",
-        "Score": 0.1,
-        "RuntimeInSeconds": 2.2030000686645508
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsMaximumEntropyMulti",
-        "Score": 0.05,
-        "RuntimeInSeconds": 0.23499999940395355
+        "Score": 0.0,
+        "RuntimeInSeconds": 2.8199999332427979
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "FastForestOva",
-        "Score": 0.0,
-        "RuntimeInSeconds": 2.3110001087188721
+        "Score": 0.025,
+        "RuntimeInSeconds": 3.3900001049041748
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "LightGbmMulti",
-        "Score": 0.0,
-        "RuntimeInSeconds": 0.5429999828338623
+        "Score": 0.025,
+        "RuntimeInSeconds": 0.60199999809265137
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "FastForestOva",
+        "Score": 0.025,
+        "RuntimeInSeconds": 3.1610000133514404
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "SdcaLogisticRegressionOva",
+        "Score": 0.05,
+        "RuntimeInSeconds": 17.297000885009766
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "LbfgsLogisticRegressionOva",
-        "Score": 0.05,
-        "RuntimeInSeconds": 0.37799999117851257
+        "Score": 0.025,
+        "RuntimeInSeconds": 0.86500000953674316
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "LbfgsMaximumEntropyMulti",
+        "Score": 0.0,
+        "RuntimeInSeconds": 0.30199998617172241
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "FastTreeOva",
+        "Score": 0.15,
+        "RuntimeInSeconds": 4.554999828338623
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "SdcaMaximumEntropyMulti",
-        "Score": 0.05,
-        "RuntimeInSeconds": 1.812000036239624
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsMaximumEntropyMulti",
         "Score": 0.15,
-        "RuntimeInSeconds": 0.1120000034570694
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionOva",
-        "Score": 0.1,
-        "RuntimeInSeconds": 13.96399974822998
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeOva",
-        "Score": 0.1,
-        "RuntimeInSeconds": 2.5940001010894775
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionOva",
-        "Score": 0.1,
-        "RuntimeInSeconds": 0.4699999988079071
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestOva",
-        "Score": 0.0,
-        "RuntimeInSeconds": 3.1400001049041748
+        "RuntimeInSeconds": 3.4570000171661377
       },
       {
         "Version": 0,
         "Type": "Trial",
         "TrainerName": "LightGbmMulti",
-        "Score": 0.0,
-        "RuntimeInSeconds": 0.45899999141693115
+        "Score": 0.025,
+        "RuntimeInSeconds": 0.46000000834465027
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "SdcaLogisticRegressionOva",
+        "Score": 0.15,
+        "RuntimeInSeconds": 19.099000930786133
       }
     ],
     "Pipeline": {
@@ -156,42 +183,35 @@
         "0": {
           "OutputColumnNames": [
             "condition",
-            "insemination",
-            "disease"
+            "breed_type"
           ],
           "InputColumnNames": [
             "condition",
-            "insemination",
-            "disease"
+            "breed_type"
           ]
         },
         "1": {
           "InputColumnNames": [
             "condition",
-            "insemination",
-            "disease"
+            "breed_type"
           ],
           "OutputColumnName": "Features"
         },
         "2": {
-          "OutputColumnName": "category",
-          "InputColumnName": "category"
+          "OutputColumnName": "Feed_Type",
+          "InputColumnName": "Feed_Type"
         },
         "3": {
-          "OutputColumnNames": [
-            "Features"
-          ],
-          "InputColumnNames": [
-            "Features"
-          ]
-        },
-        "4": {
-          "L1Regularization": 1.0,
-          "L2Regularization": 0.1,
-          "LabelColumnName": "category",
+          "NumberOfLeaves": 4,
+          "MinimumExampleCountPerLeaf": 20,
+          "NumberOfTrees": 4,
+          "MaximumBinCountPerFeature": 255,
+          "FeatureFraction": 1.0,
+          "LearningRate": 0.099999999999999978,
+          "LabelColumnName": "Feed_Type",
           "FeatureColumnName": "Features"
         },
-        "5": {
+        "4": {
           "OutputColumnName": "PredictedLabel",
           "InputColumnName": "PredictedLabel"
         }
@@ -200,8 +220,7 @@
         "OneHotEncoding",
         "Concatenate",
         "MapValueToKey",
-        "NormalizeMinMax",
-        "SdcaMaximumEntropyMulti",
+        "FastTreeOva",
         "MapKeyToValue"
       ]
     },

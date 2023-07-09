@@ -15,17 +15,35 @@ namespace AutoCow
         #region model input class
         public class ModelInput
         {
+            [ColumnName(@"Livestock_Animal")]
+            public string Livestock_Animal { get; set; }
+
+            [ColumnName(@"Age")]
+            public float Age { get; set; }
+
+            [ColumnName(@"Feed_Type")]
+            public string Feed_Type { get; set; }
+
+            [ColumnName(@"Food_Size_KG")]
+            public float Food_Size_KG { get; set; }
+
+            [ColumnName(@"Feed_Frequency")]
+            public float Feed_Frequency { get; set; }
+
+            [ColumnName(@"weight")]
+            public float Weight { get; set; }
+
             [ColumnName(@"condition")]
             public string Condition { get; set; }
 
             [ColumnName(@"insemination")]
             public string Insemination { get; set; }
 
-            [ColumnName(@"disease")]
-            public string Disease { get; set; }
+            [ColumnName(@"type")]
+            public string Type { get; set; }
 
-            [ColumnName(@"category")]
-            public string Category { get; set; }
+            [ColumnName(@"breed_type")]
+            public string Breed_type { get; set; }
 
         }
 
@@ -37,17 +55,35 @@ namespace AutoCow
         #region model output class
         public class ModelOutput
         {
+            [ColumnName(@"Livestock_Animal")]
+            public string Livestock_Animal { get; set; }
+
+            [ColumnName(@"Age")]
+            public float Age { get; set; }
+
+            [ColumnName(@"Feed_Type")]
+            public uint Feed_Type { get; set; }
+
+            [ColumnName(@"Food_Size_KG")]
+            public float Food_Size_KG { get; set; }
+
+            [ColumnName(@"Feed_Frequency")]
+            public float Feed_Frequency { get; set; }
+
+            [ColumnName(@"weight")]
+            public float Weight { get; set; }
+
             [ColumnName(@"condition")]
             public float[] Condition { get; set; }
 
             [ColumnName(@"insemination")]
-            public float[] Insemination { get; set; }
+            public string Insemination { get; set; }
 
-            [ColumnName(@"disease")]
-            public float[] Disease { get; set; }
+            [ColumnName(@"type")]
+            public string Type { get; set; }
 
-            [ColumnName(@"category")]
-            public uint Category { get; set; }
+            [ColumnName(@"breed_type")]
+            public float[] Breed_type { get; set; }
 
             [ColumnName(@"Features")]
             public float[] Features { get; set; }

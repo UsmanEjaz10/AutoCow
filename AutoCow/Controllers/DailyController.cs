@@ -77,11 +77,12 @@ namespace AutoCow.Controllers
             {
                 model.disease = "N";
             }
-            Console.WriteLine("Info recieved at controller now sending it to Repository");
+
+            cow_Profile.category = _daily_planRepository.dietPlanPredictor(model);
 
             if(_daily_planRepository.Add(model) && _daily_planRepository.AddProduction(model))
             {
-               _daily_planRepository.UpdateCow_ProfileData(model);
+               _daily_planRepository.UpdateCow_ProfileData(cow_Profile);
             }
 
             _daily_planRepository.AddMonthlyProduction(model);
@@ -133,9 +134,12 @@ namespace AutoCow.Controllers
             Daily_plan daily_Plan = JsonConvert.DeserializeObject<Daily_plan>(jsonString1);
             Console.WriteLine(daily_Plan.id + " " + daily_Plan.type +" " +daily_Plan.milk);
 
+            Cow_profile cow_Profile = _cowProfileRepository.GetCowById(model.id);
+            cow_Profile.category = _daily_planRepository.dietPlanPredictor(model);
+
             if (_daily_planRepository.Add(daily_Plan) && _daily_planRepository.AddProduction(daily_Plan))
             {
-                 _daily_planRepository.UpdateCow_ProfileData(daily_Plan);
+                 _daily_planRepository.UpdateCow_ProfileData(cow_Profile);
             }
 
 
